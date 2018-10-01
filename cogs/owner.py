@@ -22,12 +22,6 @@ class Owner:
             return '\n'.join(content.split('\n')[1:-1])
         return content.strip('` \n')
 
-    async def __local_check(self, ctx):
-        if ctx.author.id == self.bot.owner:
-            return True
-        else:
-            return
-
     @commands.command(hidden=True, name='eval', aliases=['evaluate'])
     @commands.is_owner()
     async def _eval(self, ctx, *, body: str):
