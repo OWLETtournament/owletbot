@@ -55,7 +55,7 @@ class Owner:
             exec(to_compile, env)
         except Exception as e:
             fooem = discord.Embed(color=0xff0000)
-            fooem.add_field(name="Code evaluation was not successful.", value=f'```\n{e.__class__.__name__}: {e}\n```'
+            fooem.add_field(name="Code evaluation was not successful. <:peposad:496434027897552896>", value=f'```\n{e.__class__.__name__}: {e}\n```'
                             .replace(self.bot.http.token, '•' * len(self.bot.http.token)))
             fooem.set_footer(text=f"Evaluated using Python {python_version()}", icon_url=icon)
             fooem.timestamp = ctx.message.created_at
@@ -68,7 +68,7 @@ class Owner:
         except Exception as e:
             value = stdout.getvalue()
             fooem = discord.Embed(color=0xff0000)
-            fooem.add_field(name="Code evaluation was not successful.", value=f'```py\n{value}{traceback.format_exc()}'
+            fooem.add_field(name="Code evaluation was not successful. <:peposad:496434027897552896>", value=f'```py\n{value}{traceback.format_exc()}'
                                                                               f'\n```'.replace(self.bot.http.token,
                                                                                                '•' * len(self.bot.http.token)))
             fooem.set_footer(text=f"Evaluated using Python {python_version()}", icon_url=icon)
@@ -77,18 +77,23 @@ class Owner:
         else:
             value = stdout.getvalue()
 
+            try:
+                await ctx.message.add_reaction(':white_check_mark:')
+            except:
+                pass
+
             if ret is None:
                 if value:
-                    sfooem = discord.Embed(color=0xDAA520)
-                    sfooem.add_field(name="Code evaluation was successful!", value=f'```py\n{value}\n```'.
+                    sfooem = discord.Embed(color=discord.Colour.green())
+                    sfooem.add_field(name="Code evaluation was successful! <:hypers:496434027348230177>", value=f'```py\n{value}\n```'.
                                      replace(self.bot.http.token, '•' * len(self.bot.http.token)))
                     sfooem.set_footer(text=f"Evaluated using Python {python_version()}", icon_url=icon)
                     sfooem.timestamp = ctx.message.created_at
                     await ctx.send(embed=sfooem)
             else:
                 self._last_result = ret
-                ssfooem = discord.Embed(color=0xDAA520)
-                ssfooem.add_field(name="Code evaluation was successful!", value=f'```py\n{value}{ret}\n```'
+                ssfooem = discord.Embed(color=discord.Colour.green())
+                ssfooem.add_field(name="Code evaluation was successful! <:hypers:496434027348230177>", value=f'```py\n{value}{ret}\n```'
                                   .replace(self.bot.http.token, '•' * len(self.bot.http.token)))
                 ssfooem.set_footer(text=f"Evaluated using Python {python_version()}", icon_url=icon)
                 ssfooem.timestamp = ctx.message.created_at
