@@ -18,6 +18,8 @@ cogs = config.cogs
 bot = commands.Bot(description=config.description, command_prefix=config.prefix,
                    case_insensitive=True, pm_help=True)
 
+bot.remove_command('help')
+
 if __name__ == '__main__':
     for cog in cogs:
         try:
