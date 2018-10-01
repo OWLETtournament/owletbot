@@ -11,7 +11,7 @@ class Roles:
     @commands.command(pass_context=True)
     async def roles(self, ctx):
 
-        if ctx.channel.id not in [466640219169357835, 449660180989345802]:
+        if ctx.channel.id not in ['466640219169357835', '449660180989345802']:
             await self.bot.say('You cannot use this command in a non bot-spam channel.')
             return
 

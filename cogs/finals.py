@@ -123,7 +123,7 @@ class Finals:
 
                 x = self.create_embed(row)
 
-                channel = self.bot.get_channel(476764717369655303)
+                channel = self.bot.get_channel('476764717369655303')
 
                 m = await channel.send(embed=x)
                 try:
@@ -135,8 +135,8 @@ class Finals:
     async def match_embed_updater(self):
         await self.bot.wait_until_ready()
 
-        channel = self.bot.get_channel(466640219169357835)
-        info_channel = self.bot.get_channel(476764717369655303)
+        channel = self.bot.get_channel('466640219169357835')
+        info_channel = self.bot.get_channel('476764717369655303')
 
         await channel.send('test')
 

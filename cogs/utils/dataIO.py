@@ -3,7 +3,6 @@ import os
 import logging
 from random import randint
 
-"""Based on by Rapptz"""
 
 class InvalidFileIO(Exception):
     pass

@@ -2,22 +2,20 @@ import discord
 from discord.ext import commands
 import sys
 import traceback
+from data import config
 
 
 def get_prefix(bot, message):
     """Callable Prefix"""
 
-    prefixes = ['?']
+    prefixes = config.prefix
 
     return commands.when_mentioned_or(*prefixes)(bot, message)
 
 
-cogs = ['cogs.owner',
-        'cogs.report',
-        'cogs.roles',
-        'cogs.finals']
+cogs = config.cogs
 
-bot = commands.Bot(command_prefix=get_prefix, description='OWLET Bot -- Written in discord.py Rewrite by MystLegend',
+bot = commands.Bot(command_prefix=get_prefix, description=cogs.description,
                    case_insensitive=True, pm_help=True)
 
 if __name__ == '__main__':
@@ -41,4 +39,4 @@ async def on_ready():
     print(f'Successfully logged in and booted...!')
 
 
-bot.run('TOKEN', bot=True, reconnect=True)
+bot.run(config.token, bot=True, reconnect=True)
