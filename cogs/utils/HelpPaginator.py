@@ -419,10 +419,6 @@ class HelpPaginator(Pages):
         self.embed.description = self.description
         self.embed.title = self.title
 
-        if hasattr(self, '_is_bot'):
-            value ='A bot coded MystLegend for the OWLET tournament'
-            self.embed.add_field(name='Support', value=value, inline=False)
-
         self.embed.set_footer(text=f'Use "{self.prefix}help <command/Category>" for more info on a command.')
 
         signature = _command_signature
