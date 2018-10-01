@@ -15,7 +15,7 @@ def get_prefix(bot, message):
 
 cogs = config.cogs
 
-bot = commands.Bot(description=cogs.description, command_prefix=config.prefix,
+bot = commands.Bot(description=config.description, command_prefix=config.prefix,
                    case_insensitive=True, pm_help=True)
 
 if __name__ == '__main__':
