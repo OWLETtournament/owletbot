@@ -55,3 +55,7 @@ class Help:
         embed = discord.Embed(title='Purged <:intick:472572212247920640>', description='\n'.join(messages), color=9305953)
         embed.set_footer(text=f'Requested by {ctx.author}', icon_url=ctx.author.avatar_url)
         await ctx.send(embed=embed, delete_after=5)
+
+
+def setup(bot):
+    bot.add_cog(Help(bot))
