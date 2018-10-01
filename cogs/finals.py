@@ -149,7 +149,7 @@ class Finals:
             for row in list_of_hashes:
                 x = self.create_embed(row)
                 try:
-                    message = info_channel.get_message(row[31])
+                    message = await info_channel.get_message(row[31])
                     await message.edit(embed=x)
                 except discord.errors.HTTPException:
                     pass
