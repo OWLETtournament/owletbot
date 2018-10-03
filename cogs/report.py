@@ -78,9 +78,9 @@ class Report:
     async def get_mod_mail(self, ctx, user: discord.User):
         try:
             with open(f"logs/{user.id}", 'r') as f:
-                ctx.send(f"{f.read()}", file=discord.File(f"logs/{user.id}"))
+                await ctx.send(f"{f.read()}", file=discord.File(f"logs/{user.id}"))
         except FileNotFoundError:
-            ctx.send('The user has no logs on file.')
+            await ctx.send('The user has no logs on file.')
 
     def save(self):
         dataIO.save_json("data/reports/users.json", self.db)
