@@ -74,6 +74,7 @@ class Report:
             await ctx.send(f'```json\n{f.read()}\n```', file=json_f)
 
     @commands.command(name='getModModmail')
+    @commands.has_any_role('Tournament Support', 'Admin', 'Moderator', 'Director')
     async def get_mod_mail(self, ctx, user: discord.User):
         try:
             with open(f"logs/{user.id}", 'r') as f:
