@@ -73,11 +73,11 @@ class Report:
             json_f = discord.File('data/reports/users.json', filename='report_db.json')
             await ctx.send(f'```json\n{f.read()}\n```', file=json_f)
 
-    @commands.command(name='getModModmail')
+    @commands.command(name='getModMail')
     @commands.has_any_role('Tournament Support', 'Admin', 'Moderator', 'Director')
     async def get_mod_mail(self, ctx, user: discord.User):
         try:
-            with open(f"logs/{user.id}", 'r') as f:
+            with open(f"logs/{user.id}.txt", 'r') as f:
                 await ctx.send(f"{f.read()}", file=discord.File(f"logs/{user.id}"))
         except FileNotFoundError:
             await ctx.send('The user has no logs on file.')
