@@ -78,7 +78,7 @@ class Report:
     async def get_mod_mail(self, ctx, user: discord.User):
         try:
             with open(f"logs/{user.id}.txt", 'r') as f:
-                await ctx.send(f"{f.read()}", file=discord.File(f"logs/{user.id}.txt"))
+                await ctx.send(f"(Times in UTC)```{f.read()}```", file=discord.File(f"logs/{user.id}.txt"))
         except FileNotFoundError:
             await ctx.send('The user has no logs on file.')
 
