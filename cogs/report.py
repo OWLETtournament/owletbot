@@ -42,7 +42,7 @@ class Report:
         self.save()
 
     @commands.command(name='userInfo')
-    @commands.has_any_role('Tournament Support', 'Admin', 'Moderator')
+    @commands.has_any_role('Tournament Support', 'Admin', 'Moderator', 'Director')
     async def user_info(self, ctx, *, user: discord.Member):
         warnings = await self._get_warnings(ctx, user)
 
@@ -61,17 +61,25 @@ class Report:
         await ctx.send(embed=e)
 
     @commands.command(name='warnUser')
-    @commands.has_any_role('Tournament Support', 'Admin', 'Moderator')
+    @commands.has_any_role('Tournament Support', 'Admin', 'Moderator', 'Director')
     async def warn_user(self, ctx, user: discord.Member, *, reason):
         await self._append_warnings(ctx, user, reason)
         await ctx.send(f'Added warning to user {user}')
 
     @commands.command(name='getRawWarns')
-    @commands.has_any_role('Tournament Support', 'Admin', 'Moderator')
+    @commands.has_any_role('Tournament Support', 'Admin', 'Moderator', 'Director')
     async def get_raw_warns(self, ctx):
         with open('data/reports/users.json') as f:
             json_f = discord.File('data/reports/users.json', filename='report_db.json')
             await ctx.send(f'```json\n{f.read()}\n```', file=json_f)
+
+    @commands.command(name='getModModmail')
+    async def get_mod_mail(self, ctx, user: discord.User):
+        try:
+            with open(f"logs/{user.id}", 'r') as f:
+                ctx.send(f"{f.read()}", file=discord.File(f"logs/{user.id}"))
+        except FileNotFoundError:
+            ctx.send('The user has no logs on file.')
 
     def save(self):
         dataIO.save_json("data/reports/users.json", self.db)
