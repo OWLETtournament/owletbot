@@ -28,7 +28,7 @@ if __name__ == '__main__':
             print(f'Failed to load cog {cog}.', file=sys.stderr)
             traceback.print_exc()
 
-bot.load_extenstion("jishaku")
+bot.load_extension("jishaku")
 
 
 @bot.event
