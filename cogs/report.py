@@ -7,7 +7,7 @@ import os
 
 
 class Report:
-    """OWLET Report System"""
+    """Commands for the OWLET report system"""
 
     default = {}
 
@@ -70,7 +70,8 @@ class Report:
     @commands.has_any_role('Tournament Support', 'Admin', 'Moderator')
     async def get_raw_warns(self, ctx):
         with open('data/reports/users.json') as f:
-            await ctx.send(f'```json\n{f.read()}\n```', file='data/reports/users.json')
+            json_f = discord.File('data/reports/users.json', filename='report_db.json')
+            await ctx.send(f'```json\n{f.read()}\n```', file=json_f)
 
     def save(self):
         dataIO.save_json("data/reports/users.json", self.db)
