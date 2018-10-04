@@ -41,7 +41,7 @@ class Roles:
                                                               "❌ - Cancel and exit")
         categ_em.set_author(name="Role-Assign Menu Category Picker")
 
-        categs = ctx.send(embed=categ_em)
+        categs = await ctx.send(embed=categ_em)
         await categs.add_reaction('⏱')
         await categs.add_reaction('🌎')
         await categs.add_reaction('📝')
