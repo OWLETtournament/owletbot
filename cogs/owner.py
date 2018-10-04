@@ -112,7 +112,7 @@ class Owner:
     async def restart(self, ctx):
         """Restarts the bot"""
         await ctx.send(embed=discord.Embed(color=0x00FFFF).set_footer(text="wow lowkey rude but fine"))
-        os.execl(sys.executable, sys.executable, * sys.argv)
+        raise KeyboardInterrupt
 
 
 def setup(bot):
