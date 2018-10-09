@@ -41,14 +41,14 @@ class Report:
 
         self.save()
 
-    @commands.command(name='die')
+    @commands.command(name='dice')
     async def dice(self, ctx, sides=None):
         """Rolls a virtual dice.
 
         Formatted in ?dice {d[sides] | [sides]} format."""
 
         import random
-        
+
         if not sides: sides = 6
         num = random.randint(1, sides)
 
