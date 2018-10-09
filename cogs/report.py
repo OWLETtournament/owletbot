@@ -52,7 +52,7 @@ class Report:
         if sides is None:
             sides = 6
         else:
-            sides = sides.split(d)
+            sides = sides.split("d")
             sides = sides[-1]
         num = random.randint(1, int(sides))
 
