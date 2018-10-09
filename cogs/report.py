@@ -48,9 +48,12 @@ class Report:
         Formatted in ?dice {d[sides] | [sides]} format."""
 
         import random
+        
+        if not sides: sides = 6
+        num = random.randint(1, sides)
 
         await ctx.send(embed=discord.Embed(colour=0x36393E, description='\U0001f3b2 || The dice lands on: **'
-                                                                        f'{random.randint(1, if not sides 6 else sides)}**'))
+                                                                        f'{num}**'))
 
     @commands.command(name='userInfo')
     @commands.has_any_role('Tournament Support', 'Admin', 'Moderator', 'Director')
