@@ -48,9 +48,13 @@ class Report:
         Formatted in ?dice {d[sides] | [sides]} format."""
 
         import random
-
-        if not sides: sides = 6
-        num = random.randint(1, sides)
+        
+        if sides is None:
+            sides = 6
+        else:
+            sides = sides.split(d)
+            sides = sides[-1]
+        num = random.randint(1, int(sides))
 
         await ctx.send(embed=discord.Embed(colour=0x36393E, description='\U0001f3b2 || The dice lands on: **'
                                                                         f'{num}**'))
