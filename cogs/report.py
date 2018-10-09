@@ -41,6 +41,17 @@ class Report:
 
         self.save()
 
+    @commands.command(name='die')
+    async def dice(self, ctx, sides=None):
+        """Rolls a virtual dice.
+
+        Formatted in ?dice {d[sides] | [sides]} format."""
+
+        import random
+
+        await ctx.send(embed=discord.Embed(colour=0x36393E, description='\U0001f3b2 || The dice lands on: **'
+                                                                        f'{random.randint(1, if not sides 6 else sides)}**'))
+
     @commands.command(name='userInfo')
     @commands.has_any_role('Tournament Support', 'Admin', 'Moderator', 'Director')
     async def user_info(self, ctx, *, user: discord.Member):
