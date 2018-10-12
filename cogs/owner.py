@@ -37,6 +37,13 @@ class Owner:
         }
 
         env.update(globals())
+        
+        
+        # iOS Form
+        body = body.replace("“", '"')
+        body = body.replace("”", '"')
+        body = body.replace("‘", "'")
+        body = body.replace("’", "'")
 
         icon = "http://i.imgur.com/9EftiVK.png"
 
