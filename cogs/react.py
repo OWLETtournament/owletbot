@@ -16,17 +16,17 @@ class ReactRoles:
         if payload.message_id == 503226932167704587:
             if payload.emoji.name == 'rowlet':
                 role = guild.get_role(503137083418738698)
-                await user.add_role(role, reason='Reaction Roles Addition')
+                await user.add_roles(role, reason='Reaction Roles Addition')
                 await user.send(embed=discord.Embed(description='I have added the **Player Applicant** role.',
                                                     colour=discord.Colour.green()))
             elif payload.emoji.name == 'cuteowlet':
                 role = guild.get_role(503136885229486083)
-                await user.add_role(role, reason='Reaction Roles Addition')
+                await user.add_roles(role, reason='Reaction Roles Addition')
                 await user.send(embed=discord.Embed(description='I have added the **Caster Applicant** role.',
                                                     colour=discord.Colour.green()))
             elif payload.emoji.name == 'scaryowlet':
                 role = guild.get_role(503136972886245406)
-                await user.add_role(role, reason='Reaction Roles Addition')
+                await user.add_roles(role, reason='Reaction Roles Addition')
                 await user.send(embed=discord.Embed(description='I have added the **Coach Applicant** role.',
                                                     colour=discord.Colour.green()))
 
@@ -37,17 +37,17 @@ class ReactRoles:
         if payload.message_id == 503226932167704587:
             if payload.emoji.name == 'rowlet':
                 role = guild.get_role(503137083418738698)
-                await user.remove_role(role, reason='Reaction Roles Removal')
+                await user.remove_roles(role, reason='Reaction Roles Removal')
                 await user.send(embed=discord.Embed(description='I have removed the **Player Applicant** role.',
                                                     colour=discord.Colour.green()))
             elif payload.emoji.name == 'cuteowlet':
                 role = guild.get_role(503136885229486083)
-                await user.remove_role(role, reason='Reaction Roles Addition')
+                await user.remove_roles(role, reason='Reaction Roles Addition')
                 await user.send(embed=discord.Embed(description='I have removed the **Caster Applicant** role.',
                                                     colour=discord.Colour.green()))
             elif payload.emoji.name == 'scaryowlet':
                 role = guild.get_role(503136972886245406)
-                await user.remove_role(role, reason='Reaction Roles Addition')
+                await user.remove_roles(role, reason='Reaction Roles Addition')
                 await user.send(embed=discord.Embed(description='I have removed the **Coach Applicant** role.',
                                                     colour=discord.Colour.green()))
 
