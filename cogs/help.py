@@ -1,3 +1,5 @@
+# -*- coding: UTF-8 -*-
+
 import discord
 from discord.ext import commands
 from cogs.utils.HelpPaginator import HelpPaginator, CannotPaginate

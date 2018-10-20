@@ -1,3 +1,5 @@
+# -*- coding: UTF-8 -*-
+
 import discord
 
 
@@ -9,7 +11,7 @@ class ReactRoles:
 
     async def on_raw_reaction_add(self, payload):
         guild = self.bot.get_guild(payload.guild_id)
-        user = guild.get_user(payload.user_id)
+        user = guild.get_member(payload.user_id)
 
         if payload.message_id == 503226932167704587:
             if payload.emoji.name == 'rowlet':
@@ -30,7 +32,7 @@ class ReactRoles:
 
     async def on_raw_reaction_remove(self, payload):
         guild = self.bot.get_guild(payload.guild_id)
-        user = guild.get_user(payload.user_id)
+        user = guild.get_member(payload.user_id)
 
         if payload.message_id == 503226932167704587:
             if payload.emoji.name == 'rowlet':
@@ -52,3 +54,4 @@ class ReactRoles:
 
 def setup(bot):
     bot.add_cog(ReactRoles(bot))
+

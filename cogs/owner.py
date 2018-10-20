@@ -1,3 +1,5 @@
+# -*- coding: UTF-8 -*-
+
 from discord.ext import commands
 import traceback
 import discord
@@ -6,6 +8,9 @@ from contextlib import redirect_stdout
 import io
 from platform import python_version
 import copy
+
+# For the eval command
+
 import os
 import sys
 
@@ -37,8 +42,7 @@ class Owner:
         }
 
         env.update(globals())
-        
-        
+
         # iOS Form
         body = body.replace("“", '"')
         body = body.replace("”", '"')

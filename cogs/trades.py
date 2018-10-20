@@ -1,3 +1,5 @@
+# -*- coding: UTF-8 -*-
+
 from discord.ext import commands
 import discord
 
