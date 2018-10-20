@@ -98,22 +98,22 @@ class Report:
     async def get_mod_mail(self, ctx, user: discord.User):
         try:
             with open(f"logs/{user.id}.txt", 'r') as f:
-                print(f.read())
-                await ctx.send(f"(Times in UTC)```{f.read()}```", file=discord.File(f"logs/{user.id}.txt"))
+                contents = f.read()
+                try:
+                    await ctx.send(f"(Times in UTC)```{contents}```", file=discord.File(f"logs/{user.id}.txt"))
+                except discord.HTTPException:
+                    await ctx.send(
+                        'The log was too long, the file will be sent here and the entire log will be paginated to'
+                        ' you.', file=discord.File(f"logs/{user.id}.txt"))
+                    print('Modmail overflow...')
+                    for x in range(int(len(contents) / 1500)):
+                        print('Paginating', x)
+                        range1 = x * 1500
+                        range2 = (x + 1) * 1500
+                        print(f'{range1}:{range2}\n{contents}')
+                        await ctx.author.send(f'```{contents[range1:range2]}```')
         except FileNotFoundError:
             await ctx.send('The user has no logs on file.')
-        except discord.HTTPException:
-            await ctx.send('The log was too long, the file will be sent here and the entire log will be Paginated to'
-                           ' you.', file=discord.File(f"logs/{user.id}.txt"))
-            with open(f'logs/{user.id}.txt', 'r') as f:
-                print('Modmail overflow...')
-                for x in range(int(len(f.read())/1500)):
-                    print('Paginating', x)
-                    contents = f.read()
-                    range1 = x*1500
-                    range2 = (x+1)*1500
-                    print(f'{range1}:{range2}\n{contents}')
-                    await ctx.author.send(f'```{contents[range1:range2]}```')
 
     def save(self):
         dataIO.save_json("data/reports/users.json", self.db)
