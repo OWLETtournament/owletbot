@@ -108,7 +108,10 @@ class Report:
                 print('Modmail overflow...')
                 for x in range(int(len(f.read())/1500)):
                     print('Paginating', x)
-                    await ctx.author.send(f'```{f.read()[x*1500:(x+1)*1500]}```')
+                    contents = f.read()
+                    range1 = x*1500
+                    range2 = (x+1)*1500
+                    await ctx.author.send(f'```{contents[range1:range2]}```')
 
     def save(self):
         dataIO.save_json("data/reports/users.json", self.db)
