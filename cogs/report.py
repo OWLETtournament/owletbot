@@ -101,6 +101,12 @@ class Report:
                 await ctx.send(f"(Times in UTC)```{f.read()}```", file=discord.File(f"logs/{user.id}.txt"))
         except FileNotFoundError:
             await ctx.send('The user has no logs on file.')
+        except discord.HTTPException:
+            await ctx.send('The log was too long, the file will be sent here and the entire log will be Paginated to'
+                           'you.', file=discord.File(f"logs/{user.id}.txt"))
+            with open(f'logs/{user.id}.txt', 'r') as f:
+                for x in range(int(len(ctx.message.content)/1500)):
+                    await ctx.author.send(f'```{f.read[x*1500:(x+1)*1500]}```')
 
     def save(self):
         dataIO.save_json("data/reports/users.json", self.db)
