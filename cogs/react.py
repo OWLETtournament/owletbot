@@ -39,17 +39,17 @@ class ReactRoles:
                 role = guild.get_role(503137083418738698)
                 await user.remove_roles(role, reason='Reaction Roles Removal')
                 await user.send(embed=discord.Embed(description='I have removed the **Player Applicant** role.',
-                                                    colour=discord.Colour.green()))
+                                                    colour=discord.Colour.red()))
             elif payload.emoji.name == 'cuteowlet':
                 role = guild.get_role(503136885229486083)
                 await user.remove_roles(role, reason='Reaction Roles Addition')
                 await user.send(embed=discord.Embed(description='I have removed the **Caster Applicant** role.',
-                                                    colour=discord.Colour.green()))
+                                                    colour=discord.Colour.red()))
             elif payload.emoji.name == 'scaryowlet':
                 role = guild.get_role(503136972886245406)
                 await user.remove_roles(role, reason='Reaction Roles Addition')
                 await user.send(embed=discord.Embed(description='I have removed the **Coach Applicant** role.',
-                                                    colour=discord.Colour.green()))
+                                                    colour=discord.Colour.red()))
 
 
 def setup(bot):
