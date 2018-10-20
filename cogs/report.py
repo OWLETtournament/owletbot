@@ -105,9 +105,7 @@ class Report:
                     await ctx.send(
                         'The log was too long, the file will be sent here and the entire log will be paginated to'
                         ' you.', file=discord.File(f"logs/{user.id}.txt"))
-                    print('Modmail overflow...')
                     for x in range(int(len(contents) / 1500)):
-                        print('Paginating', x)
                         range1 = x * 1500
                         range2 = (x + 1) * 1500
                         print(f'{range1}:{range2}\n{contents}')
