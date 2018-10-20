@@ -111,6 +111,7 @@ class Report:
                     contents = f.read()
                     range1 = x*1500
                     range2 = (x+1)*1500
+                    print(f'{range1}:{range2}\n{contents}')
                     await ctx.author.send(f'```{contents[range1:range2]}```')
 
     def save(self):
