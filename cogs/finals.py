@@ -158,6 +158,6 @@ class Finals:
             await asyncio.sleep(300)
 
 
-def setup(bot):
-    bot.add_cog(Finals(bot))
-    asyncio.get_event_loop().create_task(Finals(bot).match_embed_updater())
+# def setup(bot):
+    # bot.add_cog(Finals(bot))
+    # asyncio.get_event_loop().create_task(Finals(bot).match_embed_updater())
