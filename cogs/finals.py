@@ -4,7 +4,7 @@ import discord
 from discord.ext import commands
 from oauth2client.service_account import ServiceAccountCredentials
 import asyncio
-import gspread
+import aiospread
 
 maps = {
     "HNMA": "Hanamura",
@@ -59,9 +59,6 @@ class Finals:
     def __init__(self, bot):
         scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
         creds = ServiceAccountCredentials.from_json_keyfile_name('data/gsheets/client-secret.json', scope)
-        client = gspread.authorize(creds)
-
-        self.sheet = client.open_by_key("1RLYzd6-IaAz1etT-7DlHd8E8yy-sL2nUcsq6Yf5kyIs").worksheet("BotC_F")
         self.bot = bot
 
     @staticmethod
@@ -117,8 +114,12 @@ class Finals:
     @commands.command(name='finalsEmbeds')
     @is_owner()
     async def finals_embeds(self, num):
+        
+        client = await aiospread.authorize(creds)
 
-        list_of_hashes = self.sheet.get_all_values()
+        sheet = await client.open_by_key("1RLYzd6-IaAz1etT-7DlHd8E8yy-sL2nUcsq6Yf5kyIs").worksheet("BotC_F")
+
+        list_of_hashes = await sheet.get_all_values()
 
         for row in list_of_hashes:
             if row[3].lower() == num.lower():
@@ -129,13 +130,19 @@ class Finals:
 
                 m = await channel.send(embed=x)
                 try:
-                    r = self.sheet.find(row[2]).row
-                    self.sheet.update_cell(r, 32, m.id)
+                    r = await sheet.find(row[2]).row
+                    await sheet.update_cell(r, 32, m.id)
                 except gspread.exceptions.CellNotFound:
                     pass
 
     async def match_embed_updater(self):
         await self.bot.wait_until_ready()
+        
+        client = await aiospread.authorize(creds)
+
+        sheet = await client.open_by_key("1RLYzd6-IaAz1etT-7DlHd8E8yy-sL2nUcsq6Yf5kyIs").worksheet("BotC_F")
+
+        list_of_hashes = await sheet.get_all_values()
 
         channel = self.bot.get_channel(466640219169357835)
         info_channel = self.bot.get_channel(476764717369655303)
@@ -146,7 +153,7 @@ class Finals:
 
         while not self.bot.is_closed():
 
-            list_of_hashes = self.sheet.get_all_values()
+            list_of_hashes = await sheet.get_all_values()
 
             for row in list_of_hashes:
                 x = self.create_embed(row)
