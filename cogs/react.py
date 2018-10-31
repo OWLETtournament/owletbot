@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 
 import discord
-from config import REACTION_MESSAGE_ID
+from config.data import REACTION_MESSAGE_ID
 
 
 class ReactRoles:
