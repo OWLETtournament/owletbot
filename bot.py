@@ -45,8 +45,4 @@ async def on_ready():
     await bot.change_presence(activity=game, status=discord.Status.online)
     print(f'Successfully logged in and booted...!')
 
-try:
-    while True:
-        bot.run(config.token, bot=True, reconnect=True)
-except KeyboardInterrupt:
-    bot.close()
+bot.run(config.token, bot=True, reconnect=True)
