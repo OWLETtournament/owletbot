@@ -35,7 +35,7 @@ class ReactRoles:
         guild = self.bot.get_guild(payload.guild_id)
         user = guild.get_member(payload.user_id)
 
-        if payload.message_id == 503226932167704587:
+        if payload.message_id == REACTION_MESSAGE_ID:
             if payload.emoji.name == 'rowlet':
                 role = guild.get_role(503137083418738698)
                 await user.remove_roles(role, reason='Reaction Roles Removal')
