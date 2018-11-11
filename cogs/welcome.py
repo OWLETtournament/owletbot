@@ -23,7 +23,7 @@ class Welcomer:
     em = discord.Embed(colour=discord.Colour.orange())
     em.description = MESSAGE.format(member)
     
-    await ctx.send(file=discord.File('w2o.png', filename='welcome.png')
+    await ctx.send(file=discord.File('w2o.png', filename='welcome.png'))
     await ctx.send(embed=em)
     
 def setup(bot):
