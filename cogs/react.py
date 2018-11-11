@@ -34,7 +34,7 @@ class ReactRoles:
                 em = discord.Embed(colour=discord.Colour.orange())
                 em.description = MESSAGE.format(user)
     
-                await user.send(file=discord.File('w2o.png', filename='welcome.png'))
+                await user.send(file=discord.File('w2c.png', filename='welcome.png'))
                 await user.send(embed=em)
                 await user.add_roles(role, reason='Reaction Roles Addition')
                 await user.send(embed=discord.Embed(description='I have added the **Player Applicant** role.',
