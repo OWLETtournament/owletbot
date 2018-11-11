@@ -32,7 +32,7 @@ class ReactRoles:
             if payload.emoji.name == 'rowlet':
                 role = guild.get_role(503137083418738698)
                 em = discord.Embed(colour=discord.Colour.orange())
-                em.description = MESSAGE.format(member)
+                em.description = MESSAGE.format(ctx.author)
     
                 await user.send(file=discord.File('w2o.png', filename='welcome.png'))
                 await user.send(embed=em)
