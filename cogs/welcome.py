@@ -13,7 +13,7 @@ Owlet is dedicated to fostering player growth and improvement. That said, the mo
 
 As a reminder, if you are applying to the tournament as a free agent, you must take it upon yourself to seek a team through tryouts, networking and engagement with your fellow Owlets.
 
-Thanks again for your interest in the Owlet Community Tournament! If you have any questions, please message the <@447612665947357185> bot in the Owlet server. We look forward to seeing you take flight with us!)
+Thanks again for your interest in the Owlet Community Tournament! If you have any questions, please message the <@447612665947357185> bot in the Owlet server. We look forward to seeing you take flight with us!""")
 
 
 class Welcomer:
