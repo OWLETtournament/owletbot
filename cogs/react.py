@@ -2,7 +2,7 @@
 
 import discord
 from data.config import REACTION_MESSAGE_ID
-MESSAGE = ("""Hello {0.mention}! Thank you for your interest in joining Owlet. By now, you should have applied for the Coach role by using the Sign Up Form. If you have, rest assured that the admin team will be reviewing your application shortly and will assign you all the necessary roles for you to start your journey with Owlet.
+MESSAGE = ("""Hello {0.mention}! Thank you for your interest in joining Owlet. By now, you should have applied for the Player role by using the Sign Up Form. If you have, rest assured that the admin team will be reviewing your application shortly and will assign you all the necessary roles for you to start your journey with Owlet.
 
 In the meantime, please familiarize yourself with our [official rulebook](https://docs.google.com/document/d/1Qcf3sPA7TqP6jMZVHfTkKmCTVk9n2hgKEz9yGP4RpQw/edit?usp=sharing). It will answer many of your questions, and provide you with a broad-strokes view of the community and tournament values.
 
