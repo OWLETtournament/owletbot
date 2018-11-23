@@ -44,16 +44,16 @@ class Roles:
         categ_em.set_author(name="Role-Assign Menu Category Picker")
 
         categs = await ctx.send(embed=categ_em)
-
-        def check(reaction, user):
-            return user == ctx.message.author and \
-                   str(reaction.emoji) in ['⏱', '🌎', '📝', '❌', '🏙', '🌲', '🌵', '🎥', '❌', '🇺🇸', '🇪🇺', '❌']
-
-        categ_react, user = self.bot.loop.create_task(self.bot.wait_for('reaction_add', check=check, timeout=60))
         await categs.add_reaction('⏱')
         await categs.add_reaction('🌎')
         await categs.add_reaction('📝')
         await categs.add_reaction('❌')
+
+        def check(reaction, user):
+            return user == ctx.message.author and str(reaction.emoji) in ['⏱', '🌎', '📝', '❌', '🏙', '🌲', '🌵',
+                                                                          '🎥', '❌', '🇺🇸', '🇪🇺', '❌']
+
+        categ_react, user = await self.bot.wait_for('reaction_add', check=check, timeout=60)
 
         if categ_react.emoji == '⏱':  # If TZ selected
             await categs.delete()
@@ -67,13 +67,13 @@ class Roles:
 
             tz_message = await ctx.send(embed=tz_em)
 
-            tz_react, user = self.bot.loop.create_task(self.bot.wait_for('reaction_add', check=check, timeout=60))
-
             await tz_message.add_reaction('🏙')
             await tz_message.add_reaction('🌲')
             await tz_message.add_reaction('🌵')
             await tz_message.add_reaction('🎥')
             await tz_message.add_reaction('❌')
+
+            tz_react, user = await self.bot.wait_for('reaction_add', check=check, timeout=60)
 
             if tz_react.emoji == '🏙':  # EST
                 await tz_message.delete()
@@ -145,12 +145,12 @@ class Roles:
             region_embed.set_author(name='Region-Assign Select Menu')
 
             region_message = await ctx.send(embed=region_embed)
-            
-            region_react, user = self.bot.loop.create_task(self.bot.wait_for('reaction_add', check=check, timeout=60))
 
             await region_message.add_reaction('🇺🇸')
             await region_message.add_reaction('🇪🇺')
             await region_message.add_reaction('❌')
+
+            region_react, user = await self.bot.wait_for('reaction_add', check=check, timeout=60)
 
             if region_react.emoji == '🇺🇸':  # If NA selected
                 await region_message.delete()
@@ -189,15 +189,15 @@ class Roles:
                                                                          "❌ - Cancel and exit")
             applicant_embed.set_author(name='Applicant-Assign Select Menu')
 
-            applicant = await ctx.send(ctx.message.channel, embed=applicant_embed)
-
-            applicant_react, user = self.bot.loop.create_task(self.bot.wait_for('reaction_add', check=check, timeout=60))
+            applicant = await ctx.send(embed=applicant_embed)
 
             await applicant.add_reaction('💻')
             await applicant.add_reaction('🎥')
             await applicant.add_reaction('🏁')
             await applicant.add_reaction('🎓')
             await applicant.add_reaction('❌')
+
+            applicant_react, user = await self.bot.wait_for('reaction_add', check=check, timeout=60)
 
             removed_role_em = discord.Embed(description='Role successfully removed.', colour=0xEC7063)
             added_role_em = discord.Embed(description='Role successfully added.', colour=0x1ABC9C)
