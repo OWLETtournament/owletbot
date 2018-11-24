@@ -218,7 +218,7 @@ class Roles:
                         await ctx.send(embed=removed_role_em)
                         return
                     elif player not in author.roles:
-                        await author.remove_roles(player, reason='Auto-role Self Assign')
+                        await author.add_roles(player, reason='Auto-role Self Assign')
                         await ctx.send(embed=added_role_em)
                         return
                 elif applicant_react.emoji == '🎥':
