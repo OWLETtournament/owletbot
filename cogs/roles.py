@@ -39,7 +39,8 @@ class Roles:
 
         categ_em = discord.Embed(colour=0xF7DC6F, description="⏱ - Timezone\n"
                                                               "🌎 - Region\n"
-                                                              "📝 - Applicant Roles\n\n"
+                                                              "📝 - Applicant Roles\n"
+                                                              "🐶 - PUG Role\n\n"
                                                               "❌ - Cancel and exit")
         categ_em.set_author(name="Role-Assign Menu Category Picker")
 
@@ -47,8 +48,8 @@ class Roles:
         self.bot.loop.create_task(categs.add_reaction('⏱'))
         self.bot.loop.create_task(categs.add_reaction('🌎'))
         self.bot.loop.create_task(categs.add_reaction('📝'))
-        self.bot.loop.create_task(categs.add_reaction('❌'))
         self.bot.loop.create_task(categs.add_reaction('🐶'))
+        self.bot.loop.create_task(categs.add_reaction('❌'))
 
         def check(reaction, member):
             return member.id == ctx.message.author.id and str(reaction.emoji) in ['⏱', '🌎', '📝', '❌', '🏙', '🌲', '🌵',
@@ -56,17 +57,17 @@ class Roles:
 
         categ_react, user = await self.bot.wait_for('reaction_add', check=check, timeout=60)
 
-        if categ_em.emoji == '🐶':  # If PUG
+        if categ_react.emoji == '🐶':  # If PUG
             await categs.delete()
             role = ctx.guild.get_role(473929528243388436)
-            
+
             if role.id in [crole.id for crole in author.roles]:
                 await author.remove_roles(role, reason='PUG auto-remove')
                 await ctx.send(embed=discord.Embed(
-                    colour=discord.Colour.red(), 
+                    colour=discord.Colour.red(),
                     description='The PUG role was removed.'
                 ))
-            
+
             elif role.id not in [croles.id for croles in author.roles]:
                 await author.add_roles(role, reason='PUG auto-add')
                 await ctx.send(embed=discord.Embed(
