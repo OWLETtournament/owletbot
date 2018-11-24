@@ -54,8 +54,13 @@ class Roles:
         def check(reaction, member):
             return member.id == ctx.message.author.id and str(reaction.emoji) in ['⏱', '🌎', '📝', '❌', '🏙', '🌲', '🌵',
                                                                                   '🎥', '❌', '🇺🇸', '🇪🇺', '❌', '🐶']
-
-        categ_react, user = await self.bot.wait_for('reaction_add', check=check, timeout=60)
+        try:
+            categ_react, user = await self.bot.wait_for('reaction_add', check=check, timeout=60)
+        except asyncio.TimeoutError:
+            await ctx.send(embed=discord.Embed(
+                colour=discord.Colour.red(),
+                description='Timed out.'
+            ))
 
         if categ_react.emoji == '🐶':  # If PUG
             await categs.delete()
@@ -93,7 +98,13 @@ class Roles:
             self.bot.loop.create_task(tz_message.add_reaction('🎥'))
             self.bot.loop.create_task(tz_message.add_reaction('❌'))
 
-            tz_react, user = await self.bot.wait_for('reaction_add', check=check, timeout=60)
+            try:
+                tz_react, user = await self.bot.wait_for('reaction_add', check=check, timeout=60)
+            except asyncio.TimeoutError:
+                await ctx.send(embed=discord.Embed(
+                    colour=discord.Colour.red(),
+                    description='Timed out.'
+                ))
 
             if tz_react.emoji == '🏙':  # EST
                 await tz_message.delete()
@@ -152,11 +163,6 @@ class Roles:
                 await ctx.send(embed=discord.Embed(description='Command cancelled.', colour=0xAED6F1))
                 return
 
-            else:  # No react within 60s
-                await tz_message.delete()
-                await ctx.send(embed=discord.Embed(description='Timed out.', colour=0xAED6F1))
-                return
-
         elif categ_react.emoji == '🌎':  # If region roles selected
             await categs.delete()
             region_embed = discord.Embed(description="🇺🇸 - NA\n"
@@ -170,7 +176,13 @@ class Roles:
             self.bot.loop.create_task(region_message.add_reaction('🇪🇺'))
             self.bot.loop.create_task(region_message.add_reaction('❌'))
 
-            region_react, user = await self.bot.wait_for('reaction_add', check=check, timeout=60)
+            try:
+                region_react, user = await self.bot.wait_for('reaction_add', check=check, timeout=60)
+            except asyncio.TimeoutError:
+                await ctx.send(embed=discord.Embed(
+                    colour=discord.Colour.red(),
+                    description='Timed out.'
+                ))
 
             if region_react.emoji == '🇺🇸':  # If NA selected
                 await region_message.delete()
@@ -196,10 +208,6 @@ class Roles:
                 await ctx.send(embed=discord.Embed(description='Cancelled.', colour=0xAED6F1))
                 return
 
-            else:  # If no react after 60s
-                await region_message.delete()
-                await ctx.send(embed=discord.Embed(description='Timed out.', colour=0xAED6F1))
-
         elif categ_react.emoji == '📝':  # Applicant reactions
             await categs.delete()
             applicant_embed = discord.Embed(colour=0xD2B4DE, description="🖥️ - Player Applicant\n"
@@ -215,7 +223,13 @@ class Roles:
             self.bot.loop.create_task(applicant.add_reaction('🎓'))
             self.bot.loop.create_task(applicant.add_reaction('❌'))
 
-            applicant_react, user = await self.bot.wait_for('reaction_add', check=check, timeout=60)
+            try:
+                applicant_react, user = await self.bot.wait_for('reaction_add', check=check, timeout=60)
+            except asyncio.TimeoutError:
+                await ctx.send(embed=discord.Embed(
+                    colour=discord.Colour.red(),
+                    description='Timed out.'
+                ))
 
             removed_role_em = discord.Embed(description='Role successfully removed.', colour=0xEC7063)
             added_role_em = discord.Embed(description='Role successfully added.', colour=0x1ABC9C)
@@ -254,18 +268,10 @@ class Roles:
             elif applicant_react.emoji == '❌':
                 await applicant.delete()
                 await ctx.send(embed=discord.Embed(description='Cancelled.', colour=0xAED6F1))
-            else:
-                await applicant.delete()
-                await ctx.send(embed=discord.Embed(description='Timed out.', colour=0xAED6F1))
 
         elif categ_react.emoji == '❌':
             await categs.delete()
             await ctx.send(embed=discord.Embed(description='Cancelled.', colour=0xAED6F1))
-            return
-
-        elif categ_react is None:
-            await categs.delete()
-            await ctx.send(embed=discord.Embed(description="Timed out.", colour=0xAED6F1))
             return
 
 
