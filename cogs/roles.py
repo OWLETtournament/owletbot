@@ -44,18 +44,37 @@ class Roles:
         categ_em.set_author(name="Role-Assign Menu Category Picker")
 
         categs = await ctx.send(embed=categ_em)
-        await categs.add_reaction('⏱')
-        await categs.add_reaction('🌎')
-        await categs.add_reaction('📝')
-        await categs.add_reaction('❌')
+        self.bot.loop.create_task(categs.add_reaction('⏱'))
+        self.bot.loop.create_task(categs.add_reaction('🌎'))
+        self.bot.loop.create_task(categs.add_reaction('📝'))
+        self.bot.loop.create_task(categs.add_reaction('❌'))
+        self.bot.loop.create_task(categs.add_reaction('🐶'))
 
-        def check(reaction, user):
-            return user == ctx.message.author and str(reaction.emoji) in ['⏱', '🌎', '📝', '❌', '🏙', '🌲', '🌵',
-                                                                          '🎥', '❌', '🇺🇸', '🇪🇺', '❌']
+        def check(reaction, member):
+            return member.id == ctx.message.author.id and str(reaction.emoji) in ['⏱', '🌎', '📝', '❌', '🏙', '🌲', '🌵',
+                                                                                  '🎥', '❌', '🇺🇸', '🇪🇺', '❌', '🐶']
 
         categ_react, user = await self.bot.wait_for('reaction_add', check=check, timeout=60)
 
-        if categ_react.emoji == '⏱':  # If TZ selected
+        if categ_em.emoji == '🐶':  # If PUG
+            await categs.delete()
+            role = ctx.guild.get_role(473929528243388436)
+            
+            if role.id in [crole.id for crole in author.roles]:
+                await author.remove_roles(role, reason='PUG auto-remove')
+                await ctx.send(embed=discord.Embed(
+                    colour=discord.Colour.red(), 
+                    description='The PUG role was removed.'
+                ))
+            
+            elif role.id not in [croles.id for croles in author.roles]:
+                await author.add_roles(role, reason='PUG auto-add')
+                await ctx.send(embed=discord.Embed(
+                    colour=discord.Colour.green(),
+                    description='The PUG role was added.'
+                ))
+
+        elif categ_react.emoji == '⏱':  # If TZ selected
             await categs.delete()
 
             tz_em = discord.Embed(colour=0x7FB3D5, description="🏙️ - EST/EDT\n"
@@ -67,11 +86,11 @@ class Roles:
 
             tz_message = await ctx.send(embed=tz_em)
 
-            await tz_message.add_reaction('🏙')
-            await tz_message.add_reaction('🌲')
-            await tz_message.add_reaction('🌵')
-            await tz_message.add_reaction('🎥')
-            await tz_message.add_reaction('❌')
+            self.bot.loop.create_task(tz_message.add_reaction('🏙'))
+            self.bot.loop.create_task(tz_message.add_reaction('🌲'))
+            self.bot.loop.create_task(tz_message.add_reaction('🌵'))
+            self.bot.loop.create_task(tz_message.add_reaction('🎥'))
+            self.bot.loop.create_task(tz_message.add_reaction('❌'))
 
             tz_react, user = await self.bot.wait_for('reaction_add', check=check, timeout=60)
 
@@ -146,9 +165,9 @@ class Roles:
 
             region_message = await ctx.send(embed=region_embed)
 
-            await region_message.add_reaction('🇺🇸')
-            await region_message.add_reaction('🇪🇺')
-            await region_message.add_reaction('❌')
+            self.bot.loop.create_task(region_message.add_reaction('🇺🇸'))
+            self.bot.loop.create_task(region_message.add_reaction('🇪🇺'))
+            self.bot.loop.create_task(region_message.add_reaction('❌'))
 
             region_react, user = await self.bot.wait_for('reaction_add', check=check, timeout=60)
 
@@ -191,11 +210,11 @@ class Roles:
 
             applicant = await ctx.send(embed=applicant_embed)
 
-            await applicant.add_reaction('💻')
-            await applicant.add_reaction('🎥')
-            await applicant.add_reaction('🏁')
-            await applicant.add_reaction('🎓')
-            await applicant.add_reaction('❌')
+            self.bot.loop.create_task(applicant.add_reaction('💻'))
+            self.bot.loop.create_task(applicant.add_reaction('🎥'))
+            self.bot.loop.create_task(applicant.add_reaction('🏁'))
+            self.bot.loop.create_task(applicant.add_reaction('🎓'))
+            self.bot.loop.create_task(applicant.add_reaction('❌'))
 
             applicant_react, user = await self.bot.wait_for('reaction_add', check=check, timeout=60)
 
