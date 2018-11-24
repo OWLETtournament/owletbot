@@ -232,7 +232,7 @@ class Roles:
             added_role_em = discord.Embed(description='Role successfully added.', colour=0x1ABC9C)
 
             if applicant_react.emoji == '🖥':
-                await applicant.delete_message()
+                await applicant.delete()
                 await asyncio.sleep(1)
                 if player in author.roles:
                     await author.remove_roles(player, reason='Auto-role Self Assign')
