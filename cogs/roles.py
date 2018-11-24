@@ -28,9 +28,9 @@ class Roles:
         eu = ctx.guild.get_role(449633899631607809)
 
         # Applicant Roles
-        player = ctx.guild.get_role(482254224252469260)
-        coach = ctx.guild.get_role(482254235480752128)
-        caster = ctx.guild.get_role(482254237548544000)
+        player = ctx.guild.get_role(503137083418738698)
+        coach = ctx.guild.get_role(503136972886245406)
+        caster = ctx.guild.get_role(503136885229486083)
 
         author = ctx.author
 
