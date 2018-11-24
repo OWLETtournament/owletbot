@@ -49,8 +49,9 @@ class Roles:
         self.bot.loop.create_task(categs.add_reaction('❌'))
 
         def check(reaction, member):
-            return member.id == ctx.message.author.id and str(reaction.emoji) in ['⏱', '🌎', '📝', '❌', '🏙', '🌲', '🌵',
-                                                                                  '🎥', '❌', '🇺🇸', '🇪🇺', '❌', '🐶', '🖥']
+            return member.id == ctx.message.author.id and str(reaction.emoji) in ['⏱', '🌎', '📝', '❌', '🏙', '🌲', 
+                                                                                  '🌵', '🎥', '❌', '🇺🇸', '🇪🇺', '❌', 
+                                                                                  '🐶', '🖥', '🎓']
         try:
             categ_react, user = await self.bot.wait_for('reaction_add', check=check, timeout=60)
         except asyncio.TimeoutError:
