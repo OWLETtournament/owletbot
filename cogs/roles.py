@@ -167,11 +167,11 @@ class Roles:
                                                      "❌ - Cancel and exit", colour=0xF5B7B1)
             region_embed.set_author(name='Region-Assign Select Menu')
 
-            region_message = await ctx.send(embed=region_embed)
+            new_variable_because_why_not = await ctx.send(embed=region_embed)
 
-            self.bot.loop.create_task(region_message.add_reaction('🇺🇸'))
-            self.bot.loop.create_task(region_message.add_reaction('🇪🇺'))
-            self.bot.loop.create_task(region_message.add_reaction('❌'))
+            self.bot.loop.create_task(new_variable_because_why_not.add_reaction('🇺🇸'))
+            self.bot.loop.create_task(new_variable_because_why_not.add_reaction('🇪🇺'))
+            self.bot.loop.create_task(new_variable_because_why_not.add_reaction('❌'))
 
             try:
                 region_react, user = await self.bot.wait_for('reaction_add', check=check, timeout=60)
@@ -182,7 +182,7 @@ class Roles:
                 ))
 
             if region_react.emoji == '🇺🇸':  # If NA selected
-                await region_message.delete()
+                await new_variable_because_why_not.delete()
                 await author.add_roles(na, reason='Auto-role Menu Assign')
                 await asyncio.sleep(1)
                 if eu in author.roles:
@@ -192,7 +192,7 @@ class Roles:
                 return
 
             elif region_react.emoji == '🇪🇺':  # If EU selected
-                await region_message.delete()
+                await new_variable_because_why_not.delete()
                 await author.add_roles(eu, reason='Auto-role Menu Assign')
                 await asyncio.sleep(1)
                 if na in author.roles:
@@ -201,7 +201,7 @@ class Roles:
                 return
 
             elif region_react.emoji == '❌':  # If cancelled
-                await region_message.delete()
+                await new_variable_because_why_not.delete()
                 await ctx.send(embed=discord.Embed(description='Cancelled.', colour=0xAED6F1))
                 return
 
