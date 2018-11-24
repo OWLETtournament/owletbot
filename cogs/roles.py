@@ -50,7 +50,7 @@ class Roles:
 
         def check(reaction, member):
             return member.id == ctx.message.author.id and str(reaction.emoji) in ['⏱', '🌎', '📝', '❌', '🏙', '🌲', '🌵',
-                                                                                  '🎥', '❌', '🇺🇸', '🇪🇺', '❌', '🐶']
+                                                                                  '🎥', '❌', '🇺🇸', '🇪🇺', '❌', '🐶', '🖥']
         try:
             categ_react, user = await self.bot.wait_for('reaction_add', check=check, timeout=60)
         except asyncio.TimeoutError:
@@ -215,7 +215,7 @@ class Roles:
 
             applicant = await ctx.send(embed=applicant_embed)
 
-            self.bot.loop.create_task(applicant.add_reaction('💻'))
+            self.bot.loop.create_task(applicant.add_reaction('🖥'))
             self.bot.loop.create_task(applicant.add_reaction('🎥'))
             self.bot.loop.create_task(applicant.add_reaction('🎓'))
             self.bot.loop.create_task(applicant.add_reaction('❌'))
@@ -231,7 +231,7 @@ class Roles:
             removed_role_em = discord.Embed(description='Role successfully removed.', colour=0xEC7063)
             added_role_em = discord.Embed(description='Role successfully added.', colour=0x1ABC9C)
 
-            if applicant_react.emoji == '💻':
+            if applicant_react.emoji == '🖥':
                 await applicant.delete_message()
                 await asyncio.sleep(1)
                 if player in author.roles:
