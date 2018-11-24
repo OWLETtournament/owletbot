@@ -14,7 +14,7 @@ class Roles:
     async def roles(self, ctx):
 
         if ctx.channel.id not in [466640219169357835, 449660180989345802]:
-            await self.bot.say('You cannot use this command in a non bot-spam channel.')
+            await ctx.send('You cannot use this command in a non bot-spam channel.')
             return
 
         owlet = self.bot.get_guild(443126056766013442)
@@ -63,14 +63,14 @@ class Roles:
 
             if role.id in [crole.id for crole in author.roles]:
                 await author.remove_roles(role, reason='PUG auto-remove')
-                await ctx.send(embed=discord.Embed(
+                return await ctx.send(embed=discord.Embed(
                     colour=discord.Colour.red(),
                     description='The PUG role was removed.'
                 ))
 
             elif role.id not in [croles.id for croles in author.roles]:
                 await author.add_roles(role, reason='PUG auto-add')
-                await ctx.send(embed=discord.Embed(
+                return await ctx.send(embed=discord.Embed(
                     colour=discord.Colour.green(),
                     description='The PUG role was added.'
                 ))
@@ -204,7 +204,6 @@ class Roles:
             await categs.delete()
             applicant_embed = discord.Embed(colour=0xD2B4DE, description="🖥️ - Player Applicant\n"
                                                                          "🎥 - Caster Applicant\n"
-                                                                         "🏁 - Referee Applicant\n"
                                                                          "🎓 - Coach Applicant\n\n"
                                                                          "❌ - Cancel and exit")
             applicant_embed.set_author(name='Applicant-Assign Select Menu')
@@ -213,7 +212,6 @@ class Roles:
 
             self.bot.loop.create_task(applicant.add_reaction('💻'))
             self.bot.loop.create_task(applicant.add_reaction('🎥'))
-            self.bot.loop.create_task(applicant.add_reaction('🏁'))
             self.bot.loop.create_task(applicant.add_reaction('🎓'))
             self.bot.loop.create_task(applicant.add_reaction('❌'))
 
@@ -241,16 +239,6 @@ class Roles:
                     return
                 elif caster not in author.roles:
                     await author.add_roles(caster, reason='Auto-role Self Assign')
-                    await ctx.send(embed=added_role_em)
-                    return
-            elif applicant_react.emoji == '🏁':
-                await applicant.delete()
-                if ref in author.roles:
-                    await author.remove_roles(ref, reason='Auto-role Self Assign')
-                    await ctx.send(embed=removed_role_em)
-                    return
-                elif ref not in author.roles:
-                    await author.add_roles(ref, reason='Auto-role Self Assign')
                     await ctx.send(embed=added_role_em)
                     return
             elif applicant_react.emoji == '🎓':
