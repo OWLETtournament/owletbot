@@ -169,9 +169,9 @@ class Roles:
 
             region_message = await ctx.send(embed=region_embed)
 
-            self.bot.loop.create_task(region_embed.add_reaction('🇺🇸'))
-            self.bot.loop.create_task(region_embed.add_reaction('🇪🇺'))
-            self.bot.loop.create_task(region_embed.add_reaction('❌'))
+            self.bot.loop.create_task(region_message.add_reaction('🇺🇸'))
+            self.bot.loop.create_task(region_message.add_reaction('🇪🇺'))
+            self.bot.loop.create_task(region_message.add_reaction('❌'))
 
             try:
                 region_react, user = await self.bot.wait_for('reaction_add', check=check, timeout=60)
