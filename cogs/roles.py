@@ -17,23 +17,20 @@ class Roles:
             await ctx.send('You cannot use this command in a non bot-spam channel.')
             return
 
-        owlet = self.bot.get_guild(443126056766013442)
-
         # TZ Roles
-        est = owlet.get_role(449634029956759572)
-        cst = owlet.get_role(449634099821412362)
-        mst = owlet.get_role(449634157169999882)
-        pst = owlet.get_role(449634200631640064)
+        est = ctx.guild.get_role(449634029956759572)
+        cst = ctx.guild.get_role(449634099821412362)
+        mst = ctx.guild.get_role(449634157169999882)
+        pst = ctx.guild.get_role(449634200631640064)
 
         # Region Roles
-        na = owlet.get_role(449633759353110541)
-        eu = owlet.get_role(449633899631607809)
+        na = ctx.guild.get_role(449633759353110541)
+        eu = ctx.guild.get_role(449633899631607809)
 
         # Applicant Roles
-        player = owlet.get_role(482254224252469260)
-        coach = owlet.get_role(482254235480752128)
-        caster = owlet.get_role(482254237548544000)
-        ref = owlet.get_role(481104680953315331)
+        player = ctx.guild.get_role(482254224252469260)
+        coach = ctx.guild.get_role(482254235480752128)
+        caster = ctx.guild.get_role(482254237548544000)
 
         author = ctx.author
 
@@ -172,9 +169,9 @@ class Roles:
 
             region_message = await ctx.send(embed=region_embed)
 
-            self.bot.loop.create_task(region_message.add_reaction('🇺🇸'))
-            self.bot.loop.create_task(region_message.add_reaction('🇪🇺'))
-            self.bot.loop.create_task(region_message.add_reaction('❌'))
+            self.bot.loop.create_task(region_embed.add_reaction('🇺🇸'))
+            self.bot.loop.create_task(region_embed.add_reaction('🇪🇺'))
+            self.bot.loop.create_task(region_embed.add_reaction('❌'))
 
             try:
                 region_react, user = await self.bot.wait_for('reaction_add', check=check, timeout=60)
