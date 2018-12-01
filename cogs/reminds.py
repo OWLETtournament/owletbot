@@ -62,7 +62,7 @@ class Reminders:
                     for pos, info in enumerate(value):
                         if (datetime(**info['time']) - datetime.utcnow()).seconds < 0:
                             mb = gld.get_member(key)
-                            mb.send(embed=f"Hi, you wanted me to remind you about: ```{info['reminder']}```")
+                            await mb.send(embed=f"Hi, you wanted me to remind you about: ```{info['reminder']}```")
                             value.pop(pos)
             await asyncio.sleep(15)
 
