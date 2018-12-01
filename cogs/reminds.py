@@ -57,18 +57,24 @@ class Reminders:
 
     async def __remind_checker(self):
         await self.bot.wait_until_ready()
-        gld = self.bot.get_guild(443126056766013442)
+        guild = self.bot.get_guild(443126056766013442)
 
         while not self.bot.is_closed():
             with open('data/reminders.json', "r") as f:
                 data = json.load(f)
-                for key, value in data:
-                    for pos, info in enumerate(value):
-                        if (datetime(**info['time']) - datetime.utcnow()).seconds < 0:
-                            mb = gld.get_member(key)
-                            await mb.send(embed=f"Hi, you wanted me to remind you about: ```{info['reminder']}```")
-                            value.pop(pos)
-            await asyncio.sleep(15)
+                print(data)
+                for key in data:
+                    print(key)
+                    for pos, info in enumerate(data[key]):
+                        print(pos, info)
+                        print((datetime(**info['time']) - datetime.utcnow()).seconds > 0)
+                        print((datetime(**info['time']) - datetime.utcnow()).seconds)
+                        if (datetime(**info['time']) - datetime.utcnow()).seconds > 0:
+                            mb = guild.get_member(int(key))
+                            await mb.send(f"Hi, you wanted me to remind you about: `{info['reminder']}`")
+                            data[key].pop(pos)
+            with open("data/reminders.json", "w") as f:
+                json.dump(data, f)
 
 
 def setup(bot):
