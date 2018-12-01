@@ -64,8 +64,7 @@ class Reminders:
                 data = json.load(f)
                 for key in data:
                     for pos, info in enumerate(data[key]):
-                        print()
-                        if ((datetime(**info['time'])) - datetime.utcnow()).total_seconds() < 0:
+                        if (((datetime(**info['time'])) - datetime.utcnow()).total_seconds() * -1) < 0:
                             mb = guild.get_member(int(key))
                             await mb.send(f"Hi, you wanted me to remind you about: `{info['reminder']}`")
                             data[key].pop(pos)
