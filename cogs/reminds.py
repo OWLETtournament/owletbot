@@ -48,7 +48,7 @@ class Reminders:
             })
             with open('data/reminders.json', 'w') as f:
                 json.dump(data, f)
-        except Exception as e:
+        except json.decoder.JSONDecodeError as e:
             with open('data/reminders.json', 'w') as f:
                 f.write("{}")
             print(e)
