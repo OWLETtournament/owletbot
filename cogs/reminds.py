@@ -62,7 +62,6 @@ class Reminders:
         while not self.bot.is_closed():
             with open('data/reminders.json', "r") as f:
                 data = json.load(f)
-                print(data)
                 for key in data:
                     for pos, info in enumerate(data[key]):
                         if (datetime(**info['time']) - datetime.utcnow()).seconds > 0:
@@ -71,6 +70,8 @@ class Reminders:
                             data[key].pop(pos)
             with open("data/reminders.json", "w") as f:
                 json.dump(data, f)
+
+            await asyncio.sleep(15)
 
 
 def setup(bot):
