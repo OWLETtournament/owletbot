@@ -45,9 +45,10 @@ class Reminders:
                     "time": ft
                 })
                 json.dump(data, f)
-        except json.decoder.JSONDecodeError:
+        except Exception as e:
             with open('data/reminders.json', 'w+') as f:
                 f.write("{}")
+            print(e)
 
         await ctx.author.send(f"A reminder for {datetime(**ft).strftime('%b-%d-%Y %H:%M')} UTC has been set.")
 
