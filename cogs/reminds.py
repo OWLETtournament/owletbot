@@ -35,16 +35,19 @@ class Reminders:
             "second": dt.second,
             "microsecond": dt.microsecond
             }
-
-        with open('data/mutes.json', "w+") as f:
-            data = json.load(f)
-            if not ctx.author.id not in data.keys():
-                data[str(ctx.author.id)] = []
-            data[str(ctx.author.id)].append({
-                "reminder": reminder,
-                "time": ft
-            })
-            json.dump(data, f)
+        try:
+            with open('data/mutes.json', "w+") as f:
+                data = json.load(f)
+                if not ctx.author.id not in data.keys():
+                     data[str(ctx.author.id)] = []
+                data[str(ctx.author.id)].append({
+                    "reminder": reminder,
+                    "time": ft
+                })
+                json.dump(data, f)
+        except json.decoder.JSONDecodeError:
+            with open('data/mutes.json', 'w+') as f:
+                f.write("{}")
 
         await ctx.author.send(f"A reminder for {datetime(**ft).strftime('%b-%d-%Y %H:%M')} UTC has been set.")
 
