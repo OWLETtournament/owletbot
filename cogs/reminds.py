@@ -40,7 +40,7 @@ class Reminders:
         try:
             with open('data/reminders.json', "r") as f:
                 data = json.load(f)
-            if not ctx.author.id not in data.keys():
+            if ctx.author.id not in data.keys():
                 data[str(ctx.author.id)] = []
             data[str(ctx.author.id)].append({
                 "reminder": reminder,
