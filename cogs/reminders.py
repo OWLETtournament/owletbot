@@ -65,4 +65,4 @@ class Reminders:
 
 
 def setup(bot):
-    bot.add_extension(Reminders(bot))
+    bot.add_cog(Reminders(bot))
