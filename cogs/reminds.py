@@ -12,7 +12,7 @@ class Reminders:
         self.bot.loop.create_task(self.__remind_checker)
 
     @commands.command()
-    async def remindme(self, ctx, time: timeconv.ConvertStrToTime()=None, *, reminder=None):
+    async def remindme(self, ctx, time: timeconv.ConvertStrToTime=None, *, reminder=None):
         """Reminds you after x time
 
         member - A member of the discord
