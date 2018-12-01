@@ -9,7 +9,7 @@ import asyncio
 class Reminders:
     def __init__(self, bot):
         self.bot = bot
-        self.bot.loop.create_task(self.__remind_checker)
+        self.bot.loop.create_task(self.__remind_checker())
 
     @commands.command()
     async def remindme(self, ctx, time=None, *, reminder=None):
@@ -64,11 +64,7 @@ class Reminders:
                 data = json.load(f)
                 print(data)
                 for key in data:
-                    print(key)
                     for pos, info in enumerate(data[key]):
-                        print(pos, info)
-                        print((datetime(**info['time']) - datetime.utcnow()).seconds > 0)
-                        print((datetime(**info['time']) - datetime.utcnow()).seconds)
                         if (datetime(**info['time']) - datetime.utcnow()).seconds > 0:
                             mb = guild.get_member(int(key))
                             await mb.send(f"Hi, you wanted me to remind you about: `{info['reminder']}`")
