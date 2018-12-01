@@ -12,12 +12,14 @@ class Reminders:
         self.bot.loop.create_task(self.__remind_checker)
 
     @commands.command()
-    async def remindme(self, ctx, time: timeconv.ConvertStrToTime=None, *, reminder=None):
+    async def remindme(self, ctx, time=None, *, reminder=None):
         """Reminds you after x time
 
         member - A member of the discord
         time - Time to mute for (almost any imaginable format!)
         reminder - dafuq did you want it for?"""
+
+        time = await timeconv.ConvertStrToTime().convert(ctx, time)
 
         if not time:
             return await ctx.send(f'{ctx.author.mention}, you are missing the time!')
@@ -36,17 +38,18 @@ class Reminders:
             "microsecond": dt.microsecond
             }
         try:
-            with open('data/reminders.json', "w+") as f:
+            with open('data/reminders.json', "r") as f:
                 data = json.load(f)
-                if not ctx.author.id not in data.keys():
-                     data[str(ctx.author.id)] = []
-                data[str(ctx.author.id)].append({
-                    "reminder": reminder,
-                    "time": ft
-                })
+            if not ctx.author.id not in data.keys():
+                data[str(ctx.author.id)] = []
+            data[str(ctx.author.id)].append({
+                "reminder": reminder,
+                "time": ft
+            })
+            with open('data/reminders.json', 'w') as f:
                 json.dump(data, f)
         except Exception as e:
-            with open('data/reminders.json', 'w+') as f:
+            with open('data/reminders.json', 'w') as f:
                 f.write("{}")
             print(e)
 
