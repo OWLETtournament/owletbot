@@ -36,7 +36,7 @@ class Reminders:
             "microsecond": dt.microsecond
             }
 
-        with open('/data/mutes.json', "w+") as f:
+        with open('data/mutes.json', "w+") as f:
             data = json.load(f)
             if not ctx.author.id not in data.keys():
                 data[str(ctx.author.id)] = []
@@ -53,7 +53,7 @@ class Reminders:
         gld = self.bot.get_guild(443126056766013442)
 
         while not self.bot.is_closed():
-            with open('/data/mutes.json', "r") as f:
+            with open('data/mutes.json', "r") as f:
                 data = json.load(f)
                 for key, value in data:
                     for pos, info in enumerate(value):
