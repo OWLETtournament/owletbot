@@ -9,7 +9,7 @@ import asyncio
 class Reminders:
     def __init__(self, bot):
         self.bot = bot
-        self.bot.loop.create_task(self.remind_checker)
+        self.bot.loop.create_task(self.__remind_checker)
 
     @commands.command()
     async def remindme(self, ctx, time: timeconv.ConvertStrToTime()=None, *, reminder=None):
@@ -48,7 +48,7 @@ class Reminders:
 
         await ctx.author.send(f"A reminder for {datetime(**ft).strftime('%b-%d-%Y %H:%M')} UTC has been set.")
 
-    async def remind_checker(self):
+    async def __remind_checker(self):
         await self.bot.wait_until_ready()
         gld = self.bot.get_guild(443126056766013442)
 
