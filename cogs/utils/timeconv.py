@@ -86,7 +86,7 @@ TIME_FORMATS = [
 
 COMPILED_SIGN = re.compile(r'\s*' + SIGN + r'\s*(?P<unsigned>.*)$')
 COMPILED_TIMEFORMATS = [re.compile(r'\s*' + timefmt + r'\s*$', re.I)
-                        for timefmt in TIMEFORMATS]
+                        for timefmt in TIME_FORMATS]
 
 MULTIPLIERS = dict([
         # ('years',  60 * 60 * 24 * 365),
