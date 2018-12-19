@@ -24,7 +24,7 @@ class TradingSystem:
 
     @commands.command(name='majorsgraduate',
                       aliases=['diamond', 'diamondgraduate', 'minorsgrad', 'diamondgrad', 'minors'])
-    async def diamond_graduate(self, ctx, name):
+    async def masters_graduate(self, ctx, name):
         servericon = ctx.guild.icon_url
         masters_em = discord.Embed(colour=discord.Colour.dark_gold(),
                                    description=f"Congrats to {name} on achieving Masters! <:masters:525060384504414208>")
