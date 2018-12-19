@@ -13,7 +13,7 @@ class TradingSystem:
         self.bot = bot
 
     @commands.command(name='minorsgraduate',
-                      aliases=['diamond', 'diamondgraduate', 'minorsgrad', 'diamondgrad', 'minors'])
+                      aliases=['diamond', 'diamondgrad', 'minorsgrad', 'diamondgrad', 'minors'])
     async def diamond_graduate(self, ctx, name):
         servericon = ctx.guild.icon_url
         diamond_em = discord.Embed(colour=discord.Colour.teal(),
@@ -23,7 +23,7 @@ class TradingSystem:
         await channel.send(embed=diamond_em)
 
     @commands.command(name='majorsgraduate',
-                      aliases=['diamond', 'diamondgraduate', 'minorsgrad', 'diamondgrad', 'minors'])
+                      aliases=['masters', 'majorsgrad', 'majorsgrad', 'mastersgrad', 'majors'])
     async def masters_graduate(self, ctx, name):
         servericon = ctx.guild.icon_url
         masters_em = discord.Embed(colour=discord.Colour.dark_gold(),
