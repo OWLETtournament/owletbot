@@ -34,7 +34,9 @@ bot.load_extension("jishaku")
 
 @bot.event
 async def on_connect():
-    await bot.change_presence(game='starting up', status=discord.Status.idle)
+    game = discord.Game(name='Starting up', type=1,
+                        url='https://twitch.tv/OwletTournament')
+    await bot.change_presence(activity=game, status=discord.Status.idle)
 @bot.event
 async def on_ready():
     """When bot started up"""
