@@ -34,7 +34,7 @@ bot.load_extension("jishaku")
 
 @bot.event
 async def on_connect():
-    await bot.change_presence(status=discord.Status.idle)
+    await bot.change_presence(game='starting up', status=discord.Status.idle)
 @bot.event
 async def on_ready():
     """When bot started up"""
