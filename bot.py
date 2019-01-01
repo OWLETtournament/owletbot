@@ -60,7 +60,7 @@ class Bot(commands.Bot):
         return_value = {}
 
         for db in dbs:
-            return_value[db] = await asyncpg.create_pool(**creds, database=db)
+            return_value[db] = await asyncpg.connect(**creds, database=db)
 
         return return_value
 
