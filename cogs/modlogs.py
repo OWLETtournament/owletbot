@@ -21,9 +21,8 @@ class ModLogs:
 
         con = self.bot.connections['owlet']
         logs = []
-        async with con.transaction():
-            async for log in con.cursor(f'SELECT * FROM modmail_logs WHERE id = {user.id}'):
-                logs.append(log['log'])
+        async for log in con.cursor(f'SELECT * FROM modmail_logs WHERE id = {user.id}'):
+            logs.append(log['log'])
 
         # Format log + write to temp file
         logs = '\n'.join(logs)
