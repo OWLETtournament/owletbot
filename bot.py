@@ -71,7 +71,7 @@ bot = Bot(description=config.description, command_prefix=config.prefix,
 bot.load_extensions(config.cogs)
 
 try:
-    bot.loop.create_task(bot.start(config.token, reconnect=True))
+    bot.run(config.token)
 
 except (KeyboardInterrupt, SystemError, SystemExit):
     bot.loop.create_task(bot.logout())
