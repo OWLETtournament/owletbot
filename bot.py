@@ -2,6 +2,7 @@
 
 import discord
 from discord.ext import commands
+import asyncpg
 import sys
 import traceback
 from data import config
@@ -15,36 +16,67 @@ def get_prefix(bot, message):
     return commands.when_mentioned_or(*prefixes)(bot, message)
 
 
-cogs = config.cogs
+class Bot(commands.Bot):
 
-bot = commands.Bot(description=config.description, command_prefix=config.prefix,
-                   case_insensitive=True, pm_help=True)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.connections = {}
 
-bot.remove_command('help')
+    def load_extensions(self, cogs):
+        for cog in cogs:
+            try:
+                self.load_extension(cog)
+            except Exception:
+                print(f'Failed to load cog {cog}.', file=sys.stderr)
+                traceback.print_exc()
 
-if __name__ == '__main__':
-    for cog in cogs:
-        try:
-            bot.load_extension(cog)
-        except Exception as e:
-            print(f'Failed to load cog {cog}.', file=sys.stderr)
-            traceback.print_exc()
+        self.remove_command('help')
+        self.load_extension("jishaku")
 
-bot.load_extension("jishaku")
+    async def on_connect(self):
+        game = discord.Game(name='Starting up', type=1,
+                            url='https://twitch.tv/OwletTournament')
+        await self.change_presence(activity=game, status=discord.Status.idle)
 
-@bot.event
-async def on_connect():
-    game = discord.Game(name='Starting up', type=1,
-                        url='https://twitch.tv/OwletTournament')
-    await bot.change_presence(activity=game, status=discord.Status.idle)
-@bot.event
-async def on_ready():
-    """When bot started up"""
+    async def on_ready(self):
+        """When bot started up"""
 
-    print(f'\n\nLogged in as: {bot.user.name} - {bot.user.id}\nVersion: {discord.__version__}\n')
-    game = discord.Game(name='OWLET games on Sun, Mon and Tues', type=1,
-                                                url='https://twitch.tv/OwletTournament')
-    await bot.change_presence(activity=game, status=discord.Status.online)
-    print(f'Successfully logged in and booted...!')
+        print(f'\n\nLogged in as: {bot.user.name} - {bot.user.id}\nVersion: {discord.__version__}\n')
+        game = discord.Game(name='OWLET games on Sun, Mon and Tues', type=1,
+                            url='https://twitch.tv/OwletTournament')
+        await self.change_presence(activity=game, status=discord.Status.online)
+        print(f'Successfully logged in and booted...!')
 
-bot.run(config.token, bot=True, reconnect=True)
+        self.connections = await self.setup_db(config.dbs)
+
+    @staticmethod
+    async def setup_db(dbs):
+        creds = {
+            "user": "owlet",
+            "password": config.db.pw,
+            "host": config.db.host
+        }
+
+        return_value = {}
+
+        for db in dbs:
+            return_value[db] = await asyncpg.create_pool(**creds, database=db)
+
+        return return_value
+
+
+bot = Bot(description=config.description, command_prefix=config.prefix,
+          case_insensitive=True, pm_help=True)
+
+bot.load_extensions(config.cogs)
+
+try:
+    bot.loop.create_task(bot.start(config.token, reconnect=True))
+
+except (KeyboardInterrupt, SystemError, SystemExit):
+    bot.loop.create_task(bot.logout())
+    for conn in bot.connections:
+        bot.loop.create_task(conn.close())
+
+finally:
+    bot.loop.close()
