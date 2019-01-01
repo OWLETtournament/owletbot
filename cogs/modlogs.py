@@ -17,7 +17,7 @@ class ModLogs:
     async def modmails(self, ctx: commands.Context, *, user: discord.Member):
         """Get the modmails of a user.
 
-        user: Any user in this Discord."""
+         user: Any user in this Discord."""
 
         con = self.bot.connections['owlet']
         logs = []
@@ -29,7 +29,7 @@ class ModLogs:
         logs = '\n'.join(logs)
         rand = randint(1000, 9999)
         fp = f'temp/temp-{rand}.log'
-        with open(fp, 'w+') as f:
+        with open(fp, 'w') as f:
             f.write(logs)
 
         await ctx.send(file=discord.File(fp, filename=f'{user.id}-modmail.log'))
