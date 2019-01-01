@@ -28,7 +28,7 @@ class ModLogs:
         # Format log + write to temp file
         logs = '\n'.join(logs)
         rand = randint(1000, 9999)
-        fp = f'temp/temp-{rand}.log'
+        fp = f'./temp/temp-{rand}.log'
         with open(fp, 'w') as f:
             f.write(logs)
 
