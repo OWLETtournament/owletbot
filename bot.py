@@ -34,7 +34,7 @@ class Bot(commands.Bot):
         self.load_extension("jishaku")
 
     async def on_connect(self):
-        game = discord.Game(name='Starting up', type=1,
+        game = discord.Game(name='Starting up', type=discord.activity.Streaming,
                             url='https://twitch.tv/OwletTournament')
         await self.change_presence(activity=game, status=discord.Status.idle)
 
@@ -42,7 +42,7 @@ class Bot(commands.Bot):
         """When bot started up"""
 
         print(f'\n\nLogged in as: {bot.user.name} - {bot.user.id}\nVersion: {discord.__version__}\n')
-        game = discord.Game(name='OWLET games on Sun, Mon and Tues', type=1,
+        game = discord.Game(name='OWLET games on Sat, Sun, Mon and Tues', type=discord.activity.Streaming,
                             url='https://twitch.tv/OwletTournament')
         await self.change_presence(activity=game, status=discord.Status.online)
         print(f'Successfully logged in and booted...!')

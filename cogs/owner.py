@@ -123,6 +123,7 @@ class Owner:
     async def restart(self, ctx):
         """Restarts the bot"""
         await ctx.send(embed=discord.Embed(color=0x00FFFF, description="wow lowkey rude but fine"))
+        await self.bot.change_presence(activity=discord.Game(name='Logging out'), status=discord.Status.online)
         await self.bot.logout()
         for conn in self.bot.connections:
             await conn.close()
