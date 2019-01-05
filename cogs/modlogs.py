@@ -1,5 +1,6 @@
 import discord
 import os
+import asyncpg
 from discord.ext import commands
 from random import randint
 
@@ -21,9 +22,13 @@ class ModLogs:
 
         con = self.bot.connections['owlet']
         logs = []
-        async with con.transaction():
-            async for log in con.cursor(f'SELECT * FROM modmail_log WHERE id = {user.id}'):
-                logs.append(log['log'])
+        try:
+            async with con.transaction():
+                async for log in con.cursor(f'SELECT * FROM modmail_log WHERE id = {user.id}'):
+                    logs.append(log['log'])
+        except asyncpg.exceptions.InterfaceError:
+            self.bot.connections = await self.bot.setup_db(['owlet'])
+            return await ctx.invoke(self.bot.get_command('modmails'), user=user)
 
         # Format log + write to temp file
         logs = '\n'.join(logs)
