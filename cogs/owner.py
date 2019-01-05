@@ -8,6 +8,7 @@ from contextlib import redirect_stdout
 import io
 from platform import python_version
 import copy
+import asyncio
 
 # For the eval command
 
@@ -123,10 +124,11 @@ class Owner:
     async def restart(self, ctx):
         """Restarts the bot"""
         await ctx.send(embed=discord.Embed(color=0x00FFFF, description="wow lowkey rude but fine"))
-        await self.bot.change_presence(activity=discord.Game(name='Logging out'), status=discord.Status.online)
-        await self.bot.logout()
+        await self.bot.change_presence(activity=discord.Game(name='Logging out'), status=discord.Status.dnd)
         for conn in self.bot.connections:
             await conn.close()
+        await asyncio.sleep(5)
+        await self.bot.logout()
         sys.exit(0)
 
 

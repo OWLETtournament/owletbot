@@ -28,11 +28,11 @@ class ModLogs:
         # Format log + write to temp file
         logs = '\n'.join(logs)
         rand = randint(1000, 9999)
-        fp = f'temp-{rand}.log'
+        fp = f'temp-{rand}.txt'
         with open(fp, 'w') as f:
             f.write(logs)
 
-        await ctx.send(file=discord.File(fp, filename=f'{user.id}-modmail.log'))
+        await ctx.send(file=discord.File(fp, filename=f'{user.id}-modmail.txt'))
 
         os.remove(fp)
 
