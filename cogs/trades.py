@@ -13,16 +13,17 @@ class TradingSystem:
         self.bot = bot
 
     @commands.command(name='diamondgraduate')
-    async def diamond_graduate(self, ctx, name):
+    async def diamond_graduate(self, ctx, *, name):
         servericon = ctx.guild.icon_url
         diamond_em = discord.Embed(colour=discord.Colour.teal(),
                                    description=f"Congrats to {name} on achieving Diamond! <:diamond:474220321562558464>")
         diamond_em.set_author(name="Minors Player Graduate!", icon_url=servericon)
         channel = ctx.guild.get_channel(511076448388251669)
         await channel.send(embed=diamond_em)
+        await ctx.send("Successfully sent.")
 
     @commands.command(name='mastersgraduate')
-    async def masters_graduate(self, ctx, name):
+    async def masters_graduate(self, ctx, *, name):
         servericon = ctx.guild.icon_url
         masters_em = discord.Embed(colour=discord.Colour.dark_gold(),
                                    description=f"Congrats to {name} on achieving Masters! <:masters:525060384504414208>")
@@ -31,7 +32,7 @@ class TradingSystem:
         await channel.send(embed=masters_em)
 
     @commands.command(name='release', aliases=['drop'])
-    async def release(self, ctx, btag, team):
+    async def release(self, ctx, btag, *, team):
         """Display that a player is being released by x team.
 
         :param btag: Battle-tag of the player
@@ -39,15 +40,15 @@ class TradingSystem:
         """
 
         rem = discord.Embed(colour=discord.Colour.red())
-        rem.description = f"{TradeEmotes.bnet} {btag}\n" \
-            f"{TradeEmotes.declined} {team}"
+        rem.description = f"{TradeEmotes.bnet.value} {btag}\n" \
+            f"{TradeEmotes.declined.value} {team}"
         rem.set_author(name="OWLET Player Drop", icon_url=ctx.guild.icon_url)
 
         channel = ctx.guild.get_channel(511076448388251669)
         await channel.send(embed=rem)
 
     @commands.command(name='pickup', aliases=['sign'])
-    async def pickup(self, ctx, btag, team):
+    async def pickup(self, ctx, btag, *, team):
         """Display that a player is being signed by x team.
 
         :param btag: Battle-tag of the player
@@ -55,8 +56,8 @@ class TradingSystem:
         """
 
         rem = discord.Embed(colour=discord.Colour.green())
-        rem.description = f"{TradeEmotes.bnet} {btag}\n" \
-            f"{TradeEmotes.accepted} {team}"
+        rem.description = f"{TradeEmotes.bnet.value} {btag}\n" \
+            f"{TradeEmotes.accepted.value} {team}"
         rem.set_author(name="OWLET Player Pickup", icon_url=ctx.guild.icon_url)
 
         channel = ctx.guild.get_channel(511076448388251669)
@@ -72,9 +73,9 @@ class TradingSystem:
         """
 
         rem = discord.Embed(colour=discord.Colour.gold())
-        rem.description = f"{TradeEmotes.bnet} {btag}\n" \
-            f"{TradeEmotes.declined} {origin}\n" \
-            f"{TradeEmotes.accepted} {destination}"
+        rem.description = f"{TradeEmotes.bnet.value} {btag}\n" \
+            f"{TradeEmotes.declined.value} {origin}\n" \
+            f"{TradeEmotes.accepted.value} {destination}"
         rem.set_author(name="OWLET Player Transfer", icon_url=ctx.guild.icon_url)
 
         channel = ctx.guild.get_channel(511076448388251669)
