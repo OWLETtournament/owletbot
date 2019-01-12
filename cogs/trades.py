@@ -24,7 +24,7 @@ class TradingSystem:
         await ctx.send("Successfully sent.")
         async with self.bot.connections['owlet'].acquire() as conn:
             await conn.execute(
-                f"INSERT INTO roster_transactions VALUES ('GRADUATE (D)', {name}, null, null, '{datetime.utcnow()}')"
+                f"INSERT INTO roster_transactions VALUES ('GRADUATE (D)', '{name}', null, null, '{datetime.utcnow()}')"
             )
 
     @commands.command(name='mastersgraduate')
@@ -38,7 +38,7 @@ class TradingSystem:
         await ctx.send("Successfully sent.")
         async with self.bot.connections['owlet'].acquire() as conn:
             await conn.execute(
-                f"INSERT INTO roster_transactions VALUES ('GRADUATE (M)', {name}, null, null, '{datetime.utcnow()}')"
+                f"INSERT INTO roster_transactions VALUES ('GRADUATE (M)', '{name}', null, null, '{datetime.utcnow()}')"
             )
 
     @commands.command(name='release', aliases=['drop'])
@@ -59,7 +59,7 @@ class TradingSystem:
         await ctx.send("Successfully sent.")
         async with self.bot.connections['owlet'].acquire() as conn:
             await conn.execute(
-                f"INSERT INTO roster_transactions VALUES ('RELEASE', {btag}, {team}, null, '{datetime.utcnow()}')"
+                f"INSERT INTO roster_transactions VALUES ('RELEASE', '{btag}', '{team}', null, '{datetime.utcnow()}')"
             )
 
     @commands.command(name='pickup', aliases=['sign'])
@@ -80,7 +80,7 @@ class TradingSystem:
         await ctx.send("Successfully sent.")
         async with self.bot.connections['owlet'].acquire() as conn:
             await conn.execute(
-                f"INSERT INTO roster_transactions VALUES ('PICKUP', {btag}, null, {team}, '{datetime.utcnow()}')"
+                f"INSERT INTO roster_transactions VALUES ('PICKUP', '{btag}', null, '{team}', '{datetime.utcnow()}')"
             )
 
     @commands.command(name='trade', aliases=['transfer'])
@@ -103,7 +103,7 @@ class TradingSystem:
         await ctx.send("Successfully sent.")
         async with self.bot.connections['owlet'].acquire() as conn:
             await conn.execute(
-                f"INSERT INTO roster_transactions VALUES ('TRANSFER', {btag}, {origin}, {destination}, '{datetime.utcnow()}')"
+                f"INSERT INTO roster_transactions VALUES ('TRANSFER', '{btag}', '{origin}', '{destination}', '{datetime.utcnow()}')"
             )
 
 
