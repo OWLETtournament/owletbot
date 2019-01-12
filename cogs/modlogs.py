@@ -20,12 +20,13 @@ class ModLogs:
 
          user: Any user in this Discord."""
 
-        con = self.bot.connections['owlet']
+        pool = self.bot.connections['owlet']
         logs = []
         try:
-            async with con.transaction():
-                async for log in con.cursor(f'SELECT * FROM modmail_log WHERE id = {user.id}'):
-                    logs.append(log['log'])
+            async with pool.acquire() as con:
+                async with con.transaction():
+                    async for log in con.cursor(f'SELECT * FROM modmail_log WHERE id = {user.id}'):
+                        logs.append(log['log'])
         except asyncpg.exceptions.InterfaceError:
             self.bot.connections = await self.bot.setup_db(['owlet'])
             return await ctx.invoke(self.bot.get_command('modmails'), user=user)

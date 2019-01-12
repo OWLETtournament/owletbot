@@ -23,6 +23,7 @@ class Bot(commands.Bot):
         self.connections = {}
 
     def load_extensions(self, cogs):
+        self.remove_command('help')
         for cog in cogs:
             try:
                 self.load_extension(cog)
@@ -30,7 +31,6 @@ class Bot(commands.Bot):
                 print(f'Failed to load cog {cog}.', file=sys.stderr)
                 traceback.print_exc()
 
-        self.remove_command('help')
         self.load_extension("jishaku")
 
     async def on_connect(self):
@@ -60,7 +60,7 @@ class Bot(commands.Bot):
         return_value = {}
 
         for db in dbs:
-            return_value[db] = await asyncpg.connect(**creds, database=db)
+            return_value[db] = await asyncpg.create_pool(**creds, database=db)
 
         return return_value
 

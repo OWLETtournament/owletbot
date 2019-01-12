@@ -2,6 +2,7 @@
 
 import discord
 from discord.ext import commands
+from datetime import datetime
 
 from cogs.utils.enums import TradeEmotes
 
@@ -21,6 +22,10 @@ class TradingSystem:
         channel = ctx.guild.get_channel(511076448388251669)
         await channel.send(embed=diamond_em)
         await ctx.send("Successfully sent.")
+        async with self.bot.connections['owlet'].acquire() as conn:
+            await conn.execute(
+                f"INSERT INTO roster_transactions VALUES ('GRADUATE (D)', {name}, null, null, {datetime.utcnow()})"
+            )
 
     @commands.command(name='mastersgraduate')
     async def masters_graduate(self, ctx, *, name):
@@ -30,6 +35,11 @@ class TradingSystem:
         masters_em.set_author(name="Majors Player Graduate!", icon_url=servericon)
         channel = ctx.guild.get_channel(511076448388251669)
         await channel.send(embed=masters_em)
+        await ctx.send("Successfully sent.")
+        async with self.bot.connections['owlet'].acquire() as conn:
+            await conn.execute(
+                f"INSERT INTO roster_transactions VALUES ('GRADUATE (M)', {name}, null, null, {datetime.utcnow()})"
+            )
 
     @commands.command(name='release', aliases=['drop'])
     async def release(self, ctx, btag, *, team):
@@ -46,6 +56,11 @@ class TradingSystem:
 
         channel = ctx.guild.get_channel(511076448388251669)
         await channel.send(embed=rem)
+        await ctx.send("Successfully sent.")
+        async with self.bot.connections['owlet'].acquire() as conn:
+            await conn.execute(
+                f"INSERT INTO roster_transactions VALUES ('RELEASE', {btag}, {team}, null, {datetime.utcnow()})"
+            )
 
     @commands.command(name='pickup', aliases=['sign'])
     async def pickup(self, ctx, btag, *, team):
@@ -62,6 +77,11 @@ class TradingSystem:
 
         channel = ctx.guild.get_channel(511076448388251669)
         await channel.send(embed=rem)
+        await ctx.send("Successfully sent.")
+        async with self.bot.connections['owlet'].acquire() as conn:
+            await conn.execute(
+                f"INSERT INTO roster_transactions VALUES ('PICKUP', {btag}, null, {team}, {datetime.utcnow()})"
+            )
 
     @commands.command(name='trade', aliases=['transfer'])
     async def trade(self, ctx, btag, origin, destination):
@@ -80,6 +100,11 @@ class TradingSystem:
 
         channel = ctx.guild.get_channel(511076448388251669)
         await channel.send(embed=rem)
+        await ctx.send("Successfully sent.")
+        async with self.bot.connections['owlet'].acquire() as conn:
+            await conn.execute(
+                f"INSERT INTO roster_transactions VALUES ('TRANSFER', {btag}, {origin}, {destination}, {datetime.utcnow()})"
+            )
 
 
 def setup(bot):
