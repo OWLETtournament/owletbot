@@ -1,8 +1,9 @@
-import discord
 import os
-import asyncpg
-from discord.ext import commands
 from random import randint
+
+import asyncpg
+import discord
+from discord.ext import commands
 
 # For IDE support
 from bot import Bot
@@ -12,6 +13,23 @@ class ModLogs:
 
     def __init__(self, bot: Bot):
         self.bot = bot
+
+    @commands.command()
+    @commands.has_any_role("Director", "Admin", "Tournament Support")
+    async def userid(self, ctx, user: discord.Member):
+        """Get the user ID."""
+        pool = self.bot.connections['owlet']
+        ids = []
+        async with pool.acquire() as con:
+            async with con.transaction():
+                async for log in con.cursor(f'SELECT * FROM modmail_log WHERE id = {user.id}'):
+                    ids.append(log['id'])
+
+        warn = False
+        if user not in ids:
+            warn = True
+
+        await ctx.send(f"That user's ID is `{user.id}`. {'*They do not have a modmail on file.*' if warn else ''}")
 
     @commands.command()
     @commands.has_any_role("Director", "Admin", "Tournament Support")
