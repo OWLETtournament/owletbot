@@ -26,7 +26,7 @@ class ModLogs:
                     ids.append(log['id'])
 
         warn = False
-        if user not in ids:
+        if user.id not in ids:
             warn = True
 
         await ctx.send(f"That user's ID is `{user.id}`. {'*They do not have a modmail on file.*' if warn else ''}")
