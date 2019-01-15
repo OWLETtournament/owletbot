@@ -42,7 +42,7 @@ class ModmailChecker:
     async def on_guild_channel_create(self, channel: discord.abc.GuildChannel):
         if not channel.category.name.lower() == "mod mail" and not isinstance(channel, discord.TextChannel):
             return
-        remind_time = timedelta(minutes=2)
+        remind_time = timedelta(days=2)
         dt = datetime.utcnow() + remind_time
         ft = {
             "year": dt.year,
