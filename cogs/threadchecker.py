@@ -19,7 +19,7 @@ class ModmailChecker:
             if str(message.channel.id) not in data:
                 return
             data.pop(str(message.channel.id))
-            with open('data/modmails.json', 'w') as f:
+            with open('data/modmail.json', 'w') as f:
                 json.dump(data, f)
 
     async def __remind_checker(self):
