@@ -11,7 +11,7 @@ class ModmailChecker:
         self.bot.loop.create_task(self.__remind_checker())
 
     async def on_message(self, message):
-        if message.channel.category.name.lower() != "modmail":
+        if message.channel.category.name.lower() != "mod mail":
             return
         if not message.content.lower().startswith("?reply"):
             with open('data/modmails.json', "r") as f:
@@ -29,7 +29,7 @@ class ModmailChecker:
         while not self.bot.is_closed():
             with open('data/modmails.json', "r") as f:
                 data = json.load(f)
-                for channel_id, time in data.keys():
+                for channel_id, time in data.items():
                     if ((datetime(**time)) - datetime.utcnow()).total_seconds() < 0:
                         channel = guild.get_channel(channel_id)
                         await channel.send(f"Hi. Make sure to respond to this thread!")
