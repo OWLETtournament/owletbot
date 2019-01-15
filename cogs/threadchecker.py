@@ -28,8 +28,8 @@ class ModmailChecker:
 
         while not self.bot.is_closed():
             with open('data/modmails.json', "r") as f:
-                data = json.load(f)
-                for channel_id, time in data.items():
+                data_copy = data = json.load(f)
+                for channel_id, time in data_copy.items():
                     if ((datetime(**time)) - datetime.utcnow()).total_seconds() < 0:
                         channel = guild.get_channel(int(channel_id))
                         await channel.send(f"Hi. Make sure to respond to this thread!")
