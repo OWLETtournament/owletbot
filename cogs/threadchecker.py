@@ -14,7 +14,7 @@ class ModmailChecker:
         if message.channel.category.name.lower() != "mod mail":
             return
         if not message.content.lower().startswith("?reply"):
-            with open('data/modmails.json', "r") as f:
+            with open('data/modmail.json', "r") as f:
                 data = json.load(f)
             if str(message.channel.id) not in data:
                 return
@@ -27,7 +27,7 @@ class ModmailChecker:
         guild = self.bot.get_guild(443126056766013442)
 
         while not self.bot.is_closed():
-            with open('data/modmails.json', "r") as f:
+            with open('data/modmail.json', "r") as f:
                 data_copy = data = json.load(f)
                 for channel_id, time in data_copy.items():
                     if ((datetime(**time)) - datetime.utcnow()).total_seconds() < 0:
@@ -53,11 +53,11 @@ class ModmailChecker:
             "second": dt.second,
             "microsecond": dt.microsecond
         }
-        with open('data/modmails.json', "r") as f:
+        with open('data/modmail.json', "r") as f:
             data = json.load(f)
         if channel.id not in data.keys():
             data[str(channel.id)] = ft
-        with open('data/modmails.json', 'w') as f:
+        with open('data/modmail.json', 'w') as f:
             json.dump(data, f, indent=2)
 
 
