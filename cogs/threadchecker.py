@@ -31,7 +31,7 @@ class ModmailChecker:
                 data = json.load(f)
                 for channel_id, time in data.items():
                     if ((datetime(**time)) - datetime.utcnow()).total_seconds() < 0:
-                        channel = guild.get_channel(channel_id)
+                        channel = guild.get_channel(int(channel_id))
                         await channel.send(f"Hi. Make sure to respond to this thread!")
                         data.pop(channel_id)
             with open("data/reminders.json", "w") as f:
