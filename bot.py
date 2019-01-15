@@ -1,11 +1,12 @@
 # -*- coding: UTF-8 -*-
 
-import discord
-from discord.ext import commands
-import asyncpg
 import sys
 import traceback
+
+import asyncpg
+import discord
 from data import config
+from discord.ext import commands
 
 
 def get_prefix(bot, message):
@@ -48,6 +49,9 @@ class Bot(commands.Bot):
         print(f'Successfully logged in and booted...!')
 
         self.connections = await self.setup_db(config.dbs)
+
+    async def on_message(self, message):
+        await self.process_commands(message)
 
     @staticmethod
     async def setup_db(dbs):
