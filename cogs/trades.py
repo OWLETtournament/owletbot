@@ -17,7 +17,7 @@ class TradingSystem:
     async def diamond_graduate(self, ctx, *, name):
         servericon = ctx.guild.icon_url
         diamond_em = discord.Embed(colour=discord.Colour.teal(),
-                                   description=f"Congrats to {name} on graduating the Minors division! <:diamond:474220321562558464>")
+                                   description=f"Congrats to {name} on achieving Diamond and graduating the Minors division! <:diamond:474220321562558464>")
         diamond_em.set_author(name="Minors Player Graduate!", icon_url=servericon)
         channel = ctx.guild.get_channel(511076448388251669)
         await channel.send(embed=diamond_em)
@@ -31,7 +31,7 @@ class TradingSystem:
     async def masters_graduate(self, ctx, *, name):
         servericon = ctx.guild.icon_url
         masters_em = discord.Embed(colour=discord.Colour.dark_gold(),
-                                   description=f"Congrats to {name} on graduating the Majors division! <:masters:525060384504414208>")
+                                   description=f"Congrats to {name} on achieving Masters graduating the Majors division! <:masters:525060384504414208>")
         masters_em.set_author(name="Majors Player Graduate!", icon_url=servericon)
         channel = ctx.guild.get_channel(511076448388251669)
         await channel.send(embed=masters_em)
