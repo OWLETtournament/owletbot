@@ -13,11 +13,11 @@ class TradingSystem:
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name='diamondgraduate')
+    @commands.command(name='minorsgraduate')
     async def diamond_graduate(self, ctx, *, name):
         servericon = ctx.guild.icon_url
         diamond_em = discord.Embed(colour=discord.Colour.teal(),
-                                   description=f"Congrats to {name} on achieving Diamond! <:diamond:474220321562558464>")
+                                   description=f"Congrats to {name} on graduating the Minors division! <:diamond:474220321562558464>")
         diamond_em.set_author(name="Minors Player Graduate!", icon_url=servericon)
         channel = ctx.guild.get_channel(511076448388251669)
         await channel.send(embed=diamond_em)
@@ -27,11 +27,11 @@ class TradingSystem:
                 f"INSERT INTO roster_transactions VALUES ('GRADUATE (D)', '{name}', null, null, '{datetime.utcnow()}')"
             )
 
-    @commands.command(name='mastersgraduate')
+    @commands.command(name='majorsgraduate')
     async def masters_graduate(self, ctx, *, name):
         servericon = ctx.guild.icon_url
         masters_em = discord.Embed(colour=discord.Colour.dark_gold(),
-                                   description=f"Congrats to {name} on achieving Masters! <:masters:525060384504414208>")
+                                   description=f"Congrats to {name} on graduating the Majors division! <:masters:525060384504414208>")
         masters_em.set_author(name="Majors Player Graduate!", icon_url=servericon)
         channel = ctx.guild.get_channel(511076448388251669)
         await channel.send(embed=masters_em)
