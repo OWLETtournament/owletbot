@@ -17,8 +17,9 @@ class ModmailChecker:
         Takes in 2 parameters: a discussion name (MUST BE NO SPACES!!!!), and a discussion description.
         """
         discussion_cat = ctx.guild.get_channel(465948052025507860)
-        c = await ctx.guild.create_text_channel(discussion_name, category=discussion_cat, description=discussion_description)
-        await ctx.send(f"Channel {c.mention} created successfully!")
+        c = await ctx.guild.create_text_channel(discussion_name, category=discussion_cat)
+        await c.edit(topic=discussion_description)
+        await ctx.send(f"Channel {c.mention} created successfully! ||Description: {discussion_description}||")
             
 
 def setup(bot):
