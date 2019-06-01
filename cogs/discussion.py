@@ -2,13 +2,12 @@ import asyncio
 import json
 from datetime import datetime, timedelta
 
-import discord
+from discord.ext import commands
 
 
 class ModmailChecker:
     def __init__(self, bot):
         self.bot = bot
-        self.bot.loop.create_task(self.__remind_checker())
 
     @commands.command(name="creatediscussion")
     async def create_discussion(self, ctx, discussion_name, *, discussion_description):
