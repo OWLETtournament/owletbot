@@ -64,16 +64,18 @@ class ModLogs:
     async def dice(self, ctx, sides=None):
         """Rolls a virtual dice.
 
-        Formatted in ?dice {d[sides] | [sides]} format."""
+        Formatted in ?dice {[start]d[end]} format."""
 
         import random
 
         if sides is None:
+            start = 1
             sides = 6
         else:
             sides = sides.split("d")
+            start = sides[0]
             sides = sides[-1]
-        num = random.randint(1, int(sides))
+        num = random.randint(int(start), int(sides))
 
         await ctx.send(embed=discord.Embed(colour=0x36393E, description='\U0001f3b2 || The dice lands on: **'
         f'{num}**'))
